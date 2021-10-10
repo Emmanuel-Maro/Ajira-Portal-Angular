@@ -1,0 +1,8 @@
+
+<footer class="footer" >
+        <div fxLayout="row" [ngStyle.xs]="{'font-size.px': 11}">
+            <mat-toolbar  id="footer" fxShow="false" fxShow.gt-md fxLayout="row" fxLayoutAlign="space-between center">
+                <span class="copy_right">&copy; {{currentDate | date: 'yyyy'}}, <a href="#">{{'Footer.Copyright' | transloco }}</a></span>
+            </mat-toolbar>
+        </div>
+</footer>

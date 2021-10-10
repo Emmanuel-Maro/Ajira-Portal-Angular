@@ -1,0 +1,91 @@
+.nida-btn{
+  background-color: #0f749d; 
+  color: #fff;
+}
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+
+table.personal-details{
+    width: 100%;
+    text-align: left;
+    font-size: .85em;
+    /*border-top: 1px solid #c8ced3;*/
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+table.personal-details th, table.personal-details td{
+    text-align: left;
+    font-size: .95em;
+    border-top: 1px solid #c8ced3;
+    padding: .35rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+table.bold-first-th tr th:first-child {
+    font-weight: 700;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, .table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #f8f9fa;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+  table{
+    width:100%;
+    border-spacing: 0 8px !important;
+  }
+  td,th{
+    font-size: 1.1rem;
+  }
+  .mat-column-ItemName {
+    flex: 0 0 425px;
+    padding-right: 7px;
+  }
+
+  .ng-select.ng-invalid.ng-touched{
+    border:1px dotted rgb(228, 91, 91);
+  }
+
+
+/************* Mobile **************************/
+.mobile-label {
+  display: none;
+}
+  @media(max-width: 600px) {
+    .mat-card .mat-card-content {
+      font-size: 1rem;
+      line-height: 23px;
+      padding: 5px 0px;
+    }
+    .mat-toolbar-single-row {
+        height: 35px !important;
+    }
+    .mobile-label {
+      width: 100px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 5px 3px;
+    }
+    .mat-column-actions{
+      width: 100% !important;
+    }
+  }

@@ -1,0 +1,38 @@
+/*
+table{
+    width:100%;
+  }
+  .mat-column-select{
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 7% !important;
+    width: 7% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+  .mat-column-category {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 80% !important;
+    width: 80% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  ::ng-deep .mat-bottom-sheet-container{
+    min-width: 75vw!important;
+  }
+  */

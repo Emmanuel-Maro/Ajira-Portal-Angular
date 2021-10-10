@@ -1,0 +1,41 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true">
+    <p style="color: white" > Wait... </p>
+</ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="60" fxFlex.lt-md = "100" fxFlex.md = "50" >
+    <mat-card>
+        <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+            <button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>
+        <span>Applicant Registration</span>
+        </mat-toolbar>
+        <div class="card-content">
+        <div style="margin:15px; padding-bottom: 9px;"><!--{{registrationForm.value | json}}-->
+        <form [formGroup]="registrationForm" (submit)="register()">
+            <mat-form-field floatLabel="always">
+            <input matInput placeholder="Email" formControlName='email' autocomplete="set-off" required >
+            <mat-icon style="margin-right: 7px;" matPrefix>email</mat-icon>
+        </mat-form-field>
+            <mat-form-field floatLabel="always" >
+                <input [type]="hidePassword ? 'password':'text'" matInput placeholder="Password" formControlName='password' name="password" required>
+                <mat-icon class="visibility-icon" matPrefix (click)="hidePassword=!hidePassword">{{hidePassword ? 'visibility_off': 'visibility'}}</mat-icon>
+                <mat-error *ngIf="registrationForm.get('password').hasError('minlength')">
+                    password must contain at least 8 characters!
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field floatLabel="always">
+                <input  [type]="hideConfirmPassword ? 'password':'text'" matInput placeholder="Confirm your password" formControlName='confirmPassword' name="confirmPassword" [errorStateMatcher]="errorMatcher" required>
+                <mat-icon class="visibility-icon" matPrefix (click)="hideConfirmPassword=!hideConfirmPassword">{{hideConfirmPassword ? 'visibility_off': 'visibility'}}</mat-icon>
+                <mat-error *ngIf="registrationForm.hasError('passwordsDoNotMatch')">
+                Passwords do not match!
+                </mat-error>
+            </mat-form-field>
+            
+            <button mat-raised-button color="primary" [disabled]="!registrationForm.valid" type="submit">Submit</button>
+        </form>
+        </div>
+        </div>
+    </mat-card>
+    </div>
+</div>

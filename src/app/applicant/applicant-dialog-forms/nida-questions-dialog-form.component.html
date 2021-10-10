@@ -1,0 +1,36 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <span>NIDA Verification</span>
+        <span class="spacer"></span>
+        <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content>
+        <div>
+            <ul *ngFor='let answ of applicantAnswers' style="display: inline-block; list-style: none;">
+            <li ><mat-icon color="warn" *ngIf='answ =="124"'>highlight_off</mat-icon> <mat-icon style="color:green" *ngIf='answ =="123"'>check_circle_outline</mat-icon></li>
+            </ul>
+        </div>
+        <table cellspacing="0" cellpadding="0" class="mat-table question-answer" >
+            <tbody>
+                <tr class="mat-row shadow">
+                    <th class="mat-header-cell">SW</th>
+                    <td class="mat-cell">{{questionSw}}</td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">EN</th>
+                    <td class="mat-cell">{{questionEn}}
+                    </td>
+                </tr>
+            </tbody>
+        </table> 
+        <mat-form-field>
+            <input type="text" matInput   placeholder="Answer..." [(ngModel)]="qnAnsw" autocomplete="off" required>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="button" (click)="onSubmit()" [disabled]= "!qnAnsw" >Submit</button>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,118 @@
+<ngx-spinner bdColor = "rgba(186,201,182,0.8)" size = "medium" color = "#fff" type = "ball-clip-rotate-pulse" [fullScreen] = "true">
+    <p style="color: white" > Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">
+        <!--<button mat-icon-button>
+            <mat-icon>list</mat-icon>
+        </button>-->
+       <span>Subscribe to Job Categories</span>
+    </mat-toolbar>
+    <mat-card-content>
+        <!--<div fxLayout="row" fxLayoutAlign="end start"><button mat-raised-button (click)="openBottomSheet()"><mat-icon>add_alert</mat-icon> Subscribed Categories</button></div> -->
+        <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="space-between start">
+            <div fxFlex="50" fxFlex.gt-md="50">
+                <form> 
+                    <button type="button" [disabled]="subscriptions.length === 0" mat-raised-button color="accent" style="margin-top:1rem" (click)="subscribe()">Subscribe</button>
+                        <table  cellspacing="0" cellpadding="0" class="mat-table" >
+                            <tbody>
+                                <tr  class="mat-row shadow">
+                                    <th class="mat-header-cell">CATEGORY</th>
+                                    <th class="mat-header-cell">Email</th>
+                                    <th class="mat-header-cell">SMS</th>
+                                    <th class="mat-header-cell">Both</th>
+                                </tr>
+                                <tr *ngIf="loading"><td></td><td><div class="loader"></div> loading data...</td></tr>
+                                <tr *ngFor="let cat of categories; index as i" class="mat-row">
+                                    <td class="mat-cell">{{cat.category}}</td>
+                                    <td class="mat-cell" style="text-align: center;">
+                                            <!--<mat-radio-button name="{{cat.category}}" value="0" style="margin-right: .5rem;" (change)="radioChange($event)"></mat-radio-button>-->
+                                            <input name="{{cat.category}}" type="radio" value="0" (change)="radioChange(cat.category,0)">
+                                    </td>
+                                    <td class="mat-cell" style="text-align: center;">
+                                       <!--<mat-radio-button  name="{{cat.category}}"value="1" style="margin-right: .5rem;" (change)="radioChange($event)"></mat-radio-button>-->
+                                       <input name="{{cat.category}}" type="radio" value="1" (change)="radioChange(cat.category,1)">
+                                    </td>
+                                    <td class="mat-cell" style="text-align: center;">
+                                        <!--<mat-radio-button  name="{{cat.category}}" value="2" (change)="radioChange($event)"></mat-radio-button>-->
+                                        <input name="{{cat.category}}" type="radio" value="2"  (change)="radioChange(cat.category,2)">
+                                    </td>
+                                    <!--<td class="mat-cell">
+                                        <mat-radio-group name="{{cat.category}}" >
+                                            <mat-radio-button value="0" style="margin-right: .5rem;" (change)="radioChange($event)">Email</mat-radio-button>
+                                            <mat-radio-button value="1" style="margin-right: .5rem;" (change)="radioChange($event)">SMS</mat-radio-button>
+                                            <mat-radio-button value="2" (change)="radioChange($event)">Both</mat-radio-button>
+                                        </mat-radio-group>
+                                    </td>-->
+                                </tr> 
+                            </tbody>
+                        </table>  
+                </form>
+            </div>
+            <div fxFlex="50"> 
+                <mat-card>
+                    <mat-card-content>
+                        <button mat-stroked-button color="accent"  [disabled]='selection.selected.length == 0' title="unsubscribe selected categories" (click)="unSubscribeSelectedCategories()">
+                            <mat-icon>remove_circle</mat-icon>Unsubscribe
+                        </button>
+                        <div class="mat-elevation-z8" style="margin-top: .5rem;">
+                            <mat-table  [dataSource]="subscribedDataSource" matSort>
+                                <!-- Checkbox Column -->
+                                <ng-container matColumnDef="select">
+                                    <mat-header-cell *matHeaderCellDef> 
+                                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                    [checked]="selection.hasValue() && isAllSelected()"
+                                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                    </mat-checkbox>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row"> 
+                                        <mat-checkbox (click)="$event.stopPropagation()"
+                                                    (change)="$event ? selection.toggle(row) : null"
+                                                    [checked]="selection.isSelected(row)">
+                                        </mat-checkbox>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="category">
+                                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Subscribed Category </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> 
+                                        <span class="mobile-label">Category:</span>
+                                        {{element.category}} 
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="subscriptionType">
+                                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Subscription Type </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> 
+                                        <span class="mobile-label">Subscription Type:</span>
+                                        {{element.type}} 
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="actions">
+                                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button mat-icon-button [disabled]='!selection.isSelected(row)' color="warn" (click)="unSubscribeCategory(row)" title="Unsubscribe">
+                                            <mat-icon>remove_circle</mat-icon> unsubscribe
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="loading">
+                                    <mat-footer-cell *matFooterCellDef colspan="4">
+                                        <div class="loader"></div>
+                                        loading data...
+                                    </mat-footer-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="noData" >
+                                    <mat-footer-cell *matFooterCellDef colspan="4"> No data... </mat-footer-cell>
+                                </ng-container>
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+                                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || subscribedDataSource.data.length > 0}"></mat-footer-row>
+                            </mat-table>
+                            <mat-paginator [length]="subscribedDataSource.data.length"  [pageIndex]="0" [pageSize]="25" showFirstLastButtons></mat-paginator>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

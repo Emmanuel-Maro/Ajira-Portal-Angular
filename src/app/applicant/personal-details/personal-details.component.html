@@ -1,0 +1,265 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<mat-card>
+    <!--<mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">-->
+        <mat-toolbar
+        [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"> 
+        Personal Details</mat-toolbar>
+    <mat-card-content> 
+        <div *ngIf='!personalDetails.nin'><!---->
+            <div style="background-color: #f8d7da; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+                <h5 style="line-height: 0; font-weight: 600;">IMPORTANT</h5>
+                <p style="margin:0px"><strong><code>Please Update your personal details by using your National Identification Number </code></strong></p>
+            </div>
+            <form [formGroup]="applicantService.NidaInfoRequestForm" class="normal-form" (submit)="ninQuestions()">
+                <mat-form-field>
+                    <mat-label>Enter your National Identification Number (NIN)</mat-label>
+                    <input type="text" (keypress)="omitChar($event)" matInput minlength="20" maxlength="20"  placeholder="Format: 19209709191140600012" formControlName="nin" autocomplete="off">
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="submit" [disabled]= "!applicantService.NidaInfoRequestForm.valid" >Submit</button>
+            </form>
+        </div>
+        <mat-card *ngIf="isQnStarted">
+            <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+                <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+                    <mat-icon>menu</mat-icon>
+                </button>
+                <span>NIDA Verification</span>
+                <span class="spacer"></span>
+                <!--<button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+                    <mat-icon>close</mat-icon>
+                </button>-->
+            </mat-toolbar>
+            <mat-card-content>
+                <div>
+                    <ul *ngFor='let answ of applicantAnswers' style="display: inline-block; list-style: none;">
+                    <li ><mat-icon color="warn" *ngIf='answ =="124"'>highlight_off</mat-icon> <mat-icon style="color:green" *ngIf='answ =="123"'>check_circle_outline</mat-icon></li>
+                    </ul>
+                </div>
+                <table cellspacing="0" cellpadding="0" class="mat-table question-answer" >
+                    <tbody>
+                        <tr class="mat-row shadow">
+                            <th class="mat-header-cell">SW</th>
+                            <td class="mat-cell">{{questionSw}}</td>
+                        </tr>
+                        <tr class="mat-row">
+                            <th class="mat-header-cell">EN</th>
+                            <td class="mat-cell">{{questionEn}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+                <mat-form-field>
+                    <input type="text" matInput   placeholder="Answer..." [(ngModel)]="qnAnsw" autocomplete="off" required>
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="button" (click)="onSubmit()" [disabled]= "!qnAnsw" >Submit</button>
+            </mat-card-content>
+        </mat-card>
+        <!---->
+
+        <div *ngIf="personalDetails.nin" fxLayoutAlign="end center"><button class="nida-btn" mat-raised-button (click)="updateNIN()">Update Data from NIDA</button></div> <!-- -->
+        <table *ngIf="personalDetails.nin" cellpadding="0" cellspacing="0" class="mat-table personal-details table-bordered table-striped bold-first-th"><!-- -->
+            <tbody>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">First Name</th>
+                    <td class="mat-cell">{{personalDetails.firstName  | uppercase}}</td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">Middle Name</th>
+                    <td class="mat-cell">{{personalDetails.middleName  | uppercase}}</td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">Last Name</th>
+                    <td class="mat-cell">{{personalDetails.familyName  | uppercase}}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Gender</th>
+                    <td class="mat-cell">{{personalDetails.gender | uppercase}}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Date of Birth</th>
+                    <td class="mat-cell"> {{personalDetails.dateBirth | date:'yyyy-MM-dd'}} </td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Region of Birth</th>
+                    <td class="mat-cell">{{personalDetails.regionofbirth | uppercase }}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">District of Birth</th>
+                    <td class="mat-cell">{{personalDetails.districtofbirth | uppercase }}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Nationality</th>
+                    <td class="mat-cell">{{personalDetails.nationality | uppercase }}</td>
+                </tr>
+               <!--<tr>
+                    <th class="mat-header-cell">Birth Certificate</th>
+                    <td class="mat-cell"><button mat-icon-button><mat-icon>attachment</mat-icon>preview</button></td>
+                </tr>-->
+                <tr>
+                    <th class="mat-header-cell">Originality</th>
+                    <td class="mat-cell">{{personalDetails.originality | uppercase }}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Marital Status</th>
+                    <td class="mat-cell">{{translateMaritalStatus(personalDetails.maritalStatus) | uppercase }}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Government Employment Status</th>
+                    <td class="mat-cell">{{translateEmploymentStatus(personalDetails.inService) | uppercase }}</td>
+                </tr>
+                <tr>
+                    <th class="mat-header-cell">Disability</th>
+                    <td class="mat-cell">{{translateDisability(personalDetails.physicalDisability) | uppercase }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="mat-cell"><button  mat-raised-button color="primary" (click)="onEdit()">Update</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="dataSource.data[0] && dataSource.data[0].countryResidence && dataSource.data[0].mobileNumber">
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+         Current Contact Details
+    </mat-toolbar>
+    <mat-card-content>
+        <div><!--*ngIf="personalDetails.nin"-->
+            <div style="margin:.5rem 0px" *ngIf="dataSource.data.length === 0"><button mat-raised-button title="add contact details" (click)="onInsertContactDetails()"><mat-icon>add_circle</mat-icon>Add</button></div>
+            <div class="mat-elevation-z8">
+                <mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="countryName">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Country Of Residence</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <span class="mobile-label">Country Of Residence:</span>
+                            {{element.countryName}} 
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="currentResidentRegion">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Resident Region</mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                            <span class="mobile-label">Resident Region:</span>
+                             {{element.stateCity || element.regionName}}
+                             </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="mobileNumber">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile No</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <span class="mobile-label">Mobile No:</span>
+                            {{element.mobileNumber }}
+                         </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="alternativeEmail">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Alternative Email Address</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <span class="mobile-label">Alternative Email:</span>
+                            {{element.alternativeEmail}} 
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="presentAddress">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Present Address</mat-header-cell>
+                        <mat-cell *matCellDef="let element"> 
+                            <span class="mobile-label">Present Address:</span>
+                            {{element.presentAddress}}
+                         </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button type="button" mat-icon-button color="primary" title="edit"
+                                (click)="onEditContactDetails(row)">
+                                <!--<mat-icon>edit</mat-icon>-->
+                                <i class="fa fa-pencil-square-o"></i> edit
+                            </button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="dataSource.data[0] && !dataSource.data[0].countryResidence && !dataSource.data[0].mobileNumber">
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <button mat-icon-button><mat-icon aria-hidden="true">menu</mat-icon></button> Current Contact Details
+    </mat-toolbar>
+    <mat-card-content>
+        <form [formGroup]="applicantService.ContactDetailsForm" (submit)="addContactDetails()">
+            <mat-dialog-content>
+                <div  fxLayout="row" fxLayoutAlign="space-between start"> 
+                    <div  fxLayout="column" fxFlex="48">
+    
+                        <ng-select
+                            [items]="countries"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="id"
+                            (change)="onCountrySelect()"
+                            placeholder="Country Of Residence:"
+                            formControlName="countryResidence">
+                        </ng-select>
+                        <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value && applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                            <input  matInput   placeholder="State/City" formControlName="stateCity" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value && applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                            <input  matInput   placeholder="Province/County" formControlName="countyProvince" autocomplete="off">
+                        </mat-form-field>
+                        <div *ngIf="!applicantService.ContactDetailsForm.controls['countryResidence'].value || applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                            <ng-select
+                                [items]="regions"
+                                [selectOnTab]="true"
+                                [clearable]="false"
+                                bindLabel="regionName"
+                                bindValue="regionId"
+                                (change)="onRegionSelect()"
+                                placeholder="Current Resident Region:"
+                                formControlName="region">
+                            </ng-select>
+                        </div>
+                        <div *ngIf="!applicantService.ContactDetailsForm.controls['countryResidence'].value || applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                            <ng-select
+                                [items]="districts"
+                                [selectOnTab]="true"
+                                [clearable]="false"
+                                bindLabel="districtName"
+                                bindValue="districtId"
+                                placeholder="Current Resident District:"
+                                formControlName="district">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div  fxLayout="column" fxFlex="48">
+                        <mat-form-field>
+                            <input  matInput   placeholder="mobile No." minlength="10" maxlength="14" formControlName="mobileNumber" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field floatLabel="never">
+                            <input matInput  placeholder="Alternative Email Address" formControlName='alternativeEmail' autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                            <input type="number" matInput   placeholder="Box Number" formControlName="boxNo" autocomplete="off">
+                        </mat-form-field>
+                        <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                            <input  matInput placeholder="Present Address" formControlName="presentAddress" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-dialog-content>
+            <div class="button-row">
+                <button type="submit" mat-raised-button color="primary" type="submit" >Save</button>
+            </div>
+            
+        </form>
+    </mat-card-content>
+
+</mat-card>

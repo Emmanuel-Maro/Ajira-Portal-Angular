@@ -1,0 +1,78 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px;"
+    [ngStyle.xs]="{'height': '28px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.sm]="{'height': '28px', 'font-size': '.75em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.md]="{'height': '32px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.lg]="{'height': '35px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.xl]="{'height': '35px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+        Other Personal Details
+        <span class="spacer"></span>
+        <button mat-icon-button  (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content> 
+        <form [formGroup]="applicantService.OtherPersonalDetailsForm" (submit)="onSubmit()">
+            <div  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start"> 
+                <div  fxLayout="column" fxFlex="45">
+                    <div *ngIf="!originality">
+                        <div  [ngStyle.xs]="{'width': '200px'}">
+                            <ng-select
+                            [items]="originalities"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Name"
+                            placeholder="Originality:"
+                            required
+                            formControlName="originality">
+                        </ng-select>
+                        </div>
+                    </div>
+                    <div  [ngStyle.xs]="{'width': '200px'}">
+                        <ng-select 
+                            [items]="maritalStatus"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Value"
+                            placeholder="Marital Status:"
+                            required
+                            formControlName="maritalStatus">
+                        </ng-select>
+                    </div>
+                    
+                </div>
+                <div  fxLayout="column" fxFlex="45">
+                        <ng-select
+                           [ngStyle.xs]="{'width': '200px'}"
+                            [items]="govStatus"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Value"
+                            placeholder="Gov. Employment Status:"
+                            required
+                            formControlName="inService">
+                        </ng-select>
+                        <ng-select
+                            [items]="impairments"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Value"
+                            placeholder="Impairments:"
+                            required
+                            formControlName="physicalDisability">
+                        </ng-select>
+                </div>
+            </div>
+            <div class="button-row" fxLayout="row" fxLayoutAlign="start start">
+                <button mat-raised-button color="primary" type="submit" >Save</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card> 

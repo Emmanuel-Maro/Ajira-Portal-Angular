@@ -1,0 +1,56 @@
+.ng-select.ng-invalid.ng-touched{
+  border:1px dotted rgb(228, 91, 91);
+}
+.ng-select {
+  padding-bottom: 0px;
+}
+
+.printout-label{
+  font-weight: bold;
+  padding-right:7px;
+}
+
+.mat-column-computerSkills {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 60% !important;
+  width: 60% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-radio-button{
+  font-size: .9rem;
+}
+
+
+/************* Mobile **************************/
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 780px) {
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+        font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 3px;
+  }
+}

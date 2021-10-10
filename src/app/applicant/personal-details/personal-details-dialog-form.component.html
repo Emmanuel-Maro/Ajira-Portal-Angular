@@ -1,0 +1,234 @@
+<!--
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">
+        <button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>
+        Personal Details</mat-toolbar>
+    <mat-card-content> 
+        <div style="background-color: #f8d7da; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            <h5 style="line-height: 0; font-weight: 600;">IMPORTANT</h5>
+            <p style="margin:0px"><strong><code>Please Update your personal details by using your National Identification Number </code></strong></p>
+        </div>
+        <div *ngIf='!response'>
+            <form [formGroup]="applicantService.NidaInfoRequestForm" class="normal-form" (submit)="onSubmit()">
+                <mat-form-field>
+                    <mat-label>Enter your National Identification Number (NIN)</mat-label>
+                    <input type="text" matInput minlength="20" maxlength="20"  placeholder="Format: 19209709191140600012" formControlName="nationalID" autocomplete="off" required>
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="submit" [disabled]= "!applicantService.NidaInfoRequestForm.valid" >Submit</button>
+            </form>
+        </div>
+
+        <div *ngIf='response && response.code !== 9008'>
+            <div>
+                <ul *ngFor='let answ of answers' style="display: inline-block; list-style: none;">
+                <li ><mat-icon color="warn" *ngIf='answ =="wrong"'>highlight_off</mat-icon> <mat-icon style="color:green" *ngIf='answ =="correct"'>check_circle_outline</mat-icon></li>
+                </ul>
+            </div>
+            <table cellspacing="0" cellpadding="0" class="mat-table question-answer" >
+                <tbody>
+                    <tr class="mat-row shadow">
+                        <th class="mat-header-cell">SW</th>
+                        <td class="mat-cell">{{response.data.qnSw}}</td>
+                    </tr>
+                    <tr class="mat-row">
+                        <th class="mat-header-cell">EN</th>
+                        <td class="mat-cell">{{response.data.qnSw}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>  
+          
+            <div>
+                <form [formGroup]="applicantService.NidaInfoRequestForm" class="normal-form" (submit)="onSubmit()">
+                    <mat-form-field>
+                        <input type="text" matInput   placeholder="Answer..." formControlName="qnAnsw" autocomplete="off" required>
+                    </mat-form-field>
+                    <button mat-raised-button color="accent" type="submit" [disabled]= "!applicantService.NidaInfoRequestForm.controls['qnAnsw'].value" >Submit</button>
+                </form>
+            </div>
+        </div>
+       
+    <div *ngIf='response && response.code === 9008'>
+        <form [formGroup]="applicantService.PersonalDetailsForm" (submit)="onSubmit()">
+            <div  fxLayout="row" fxLayoutAlign="space-between start"> 
+                <div  fxLayout="column" fxFlex="31">
+                    <mat-form-field>
+                        <input  matInput   placeholder="First Name" formControlName="firstName" autocomplete="off" required>
+                    </mat-form-field>
+                    <div>
+                        <ng-select
+                            [items]="gender"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Name"
+                            placeholder="Gender:"
+                            formControlName="gender">
+                        </ng-select>
+                    </div>
+                    <mat-form-field>
+                        <input  matInput   placeholder="Region of Birth" formControlName="regionOfBirth" autocomplete="off" >
+                    </mat-form-field>
+                    <div>
+                        <ng-select
+                            [items]="choices"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Value"
+                            bindValue="Value"
+                            placeholder="Government Employment Status:"
+                            required
+                            formControlName="governmentEmploymentStatus">
+                        </ng-select>
+                    </div>
+                    
+                </div>
+                <div  fxLayout="column" fxFlex="31">
+                    <mat-form-field>
+                        <input  matInput   placeholder="Middle Name" formControlName="middleName" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input  matInput   placeholder="Date of Birth" formControlName="dateOfBirth" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input  matInput   placeholder="District of Birth" formControlName="districtOfBirth" autocomplete="off" >
+                    </mat-form-field>
+                    <div>
+                        <ng-select
+                            [items]="impairments"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="name"
+                            placeholder="Impairments:"
+                            required
+                            formControlName="governmentEmploymentStatus">
+                        </ng-select>
+                    </div>
+                </div>
+                <div  fxLayout="column" fxFlex="31">
+                    <mat-form-field>
+                        <input  matInput   placeholder="Last Name" formControlName="lastName" autocomplete="off">
+                    </mat-form-field>
+                    <div>
+                        <ng-select
+                            [items]="originalities"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="name"
+                            placeholder="Originality:"
+                            formControlName="originality">
+                        </ng-select>
+                    </div>  
+                    <div>
+                        <ng-select
+                            [items]="maritalStatus"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="Name"
+                            bindValue="Name"
+                            placeholder="Marital Status:"
+                            formControlName="maritalStatus">
+                        </ng-select>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button color="accent" type="submit" >Submit</button>
+        </form>
+        <div>
+        <hr>
+        <mat-tab-group  [(selectedIndex)]="selectedTabIndex" >
+            <mat-tab label="Contact Details">
+                <ng-template matTabContent>
+                    <form [formGroup]="applicantService.ContactDetailsForm" (submit)="addContactDetails">
+                        <div  fxLayout="row" fxLayoutAlign="space-between start"> 
+                            <div  fxLayout="column" fxFlex="48">
+                                <div>
+                                    <ng-select
+                                        [items]="countries"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        bindLabel="name"
+                                        bindValue="name"
+                                        placeholder="Country Of Residence:"
+                                        formControlName="countryOfResidence">
+                                    </ng-select>
+                                </div>
+                                <div>
+                                    <ng-select
+                                        [items]="regions"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        bindLabel="name"
+                                        bindValue="name"
+                                        placeholder="Current Resident Region:"
+                                        formControlName="countryOfResidence">
+                                    </ng-select>
+                                </div>
+                                <mat-form-field>
+                                    <input type="number" matInput   placeholder="P.O.BOX" formControlName="boxNo" autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                            <div  fxLayout="column" fxFlex="48">
+                                <mat-form-field>
+                                    <input  matInput   placeholder="mobile No." formControlName="mobileNo" autocomplete="off">
+                                </mat-form-field>
+                                <div>
+                                    <ng-select
+                                        [items]="districts"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        bindLabel="name"
+                                        bindValue="name"
+                                        placeholder="Current Resident District:"
+                                        formControlName="countryOfResidence">
+                                    </ng-select>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <button mat-raised-button color="accent" type="submit" >Submit</button>
+                    </form>
+                </ng-template>
+            </mat-tab>
+            <mat-tab label="Birth Certificate Attachment">
+                <ng-template matTabContent>
+                    <mat-hint>Select your attachment (max size 2MB)</mat-hint>
+                    <input type="file"  (change)="onFileChange($event)" accept="application/pdf" #attachmentFile>
+                    <hr>
+                    <mat-table [dataSource]="attachmentsDataSource" matSort>
+                        <ng-container matColumnDef="AttachmentType">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> Attachment Type </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.AttachmentType}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="actions">
+                            <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button type="button" mat-icon-button color="primary" title="preview document"
+                                    (click)="onPreview(row)">
+                                    <mat-icon>picture_as_pdf</mat-icon>
+                                </button>
+                                <button type="button" mat-icon-button color="warn" title="delete"
+                                    (click)="onDeleteAttachment(row)">
+                                    <mat-icon>delete_outline</mat-icon>
+                                </button>
+                            </mat-cell>
+                        </ng-container>
+            
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                    </mat-table>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+        </div>
+    </div>
+    </mat-card-content>
+</mat-card> 
+-->

@@ -1,0 +1,19 @@
+<div class="main-container"> 
+    <app-header></app-header>
+    <mat-sidenav-container>
+        <mat-sidenav  *ngIf="isAuthenticated()" #snav id="snav" class="dark-sidebar pl-xs" [mode]="mobileQuery.matches ? 'side' : 'over'"  fixedTopGap="0" [opened]="mobileQuery.matches" [disableClose]="mobileQuery.matches" >
+            <app-sidebar-special *ngIf="isAuthenticated()"></app-sidebar-special> 
+        </mat-sidenav>
+        <mat-sidenav-content class="page-wrapper">
+            <div class="page-content">
+                <button *ngIf="isAuthenticated()" fxShow="false"  fxShow.xs="true" fxShow.sm="true" mat-icon-button (click)="toggle()" value="sidebarclosed">
+                    <mat-icon class="heartbit" >menu</mat-icon>
+                </button>
+                <router-outlet> 
+                    <app-spinner></app-spinner> 
+                </router-outlet>
+            </div>     
+        <app-footer></app-footer>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

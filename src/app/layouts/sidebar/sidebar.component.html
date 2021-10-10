@@ -1,0 +1,28 @@
+
+<div>
+  <div id="image-panel" *ngIf='isAuthenticated()'>
+    <div div fxLayout="row" fxLayoutAlign="center end"class="user-profile">
+      <img [src]="imagePath | safe" height="115px" />
+      <div fxLayout="row"> 
+        <input  type="file" (change)="handle($event)" accept="image/gif, image/jpeg, image/png" #imageFile />
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="openFile()"><mat-icon  color="warn" class="photo-btn" title="{{title}}">add_a_photo</mat-icon></button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf='isAuthenticated()' class="navigation-menu" fxLayout="column">
+    <a mat-raised-button [routerLink]="['/applicant/dashboard']" routerLinkActive="selected"><mat-icon>home</mat-icon>Home</a>
+    <a mat-raised-button [routerLink]="['/applicant/personal-details']" routerLinkActive="selected" >Personal Details</a>
+    <a mat-raised-button [routerLink]="['/applicant/academic-qualification']" routerLinkActive="selected" >Academic Qualification</a>
+    <a mat-raised-button [routerLink]="['/applicant/professional-qualifications']" routerLinkActive="selected" >Professional Qualifications</a>
+    <a mat-raised-button [routerLink]="['/applicant/language-proficiency']" routerLinkActive="selected">Language Proficiency</a>
+    <a mat-raised-button [routerLink]="['/applicant/working-experience']" routerLinkActive="selected">Working Experience</a>
+    <a mat-raised-button [routerLink]="['/applicant/training']" routerLinkActive="selected">Training & Workshop</a>
+    <a mat-raised-button [routerLink]="['/applicant/computer-literacy']" routerLinkActive="selected" >Computer Literacy</a>
+    <a mat-raised-button [routerLink]="['/applicant/referees']" routerLinkActive="selected" >Referees</a>
+    <a mat-raised-button [routerLink]="['/applicant/other-attachments']" routerLinkActive="selected">Other Attachments</a>
+    <a mat-raised-button [routerLink]="['/applicant/cv-preview']" routerLinkActive="selected" >CV Preview</a>
+    <a mat-raised-button [routerLink]="['/applicant/declaration']" routerLinkActive="selected" >Declaration</a>
+  </div>
+</div>

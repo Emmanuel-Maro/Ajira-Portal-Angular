@@ -1,0 +1,100 @@
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatMenuTrigger, MatPaginator, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSort, MatTableDataSource} from "@angular/material";
+import { NgIdleService } from '../../../applicant/service/ng-idle.service';
+import { AddsubjectComponent } from '../../dialogs/addsubject/addsubject.component';
+import { DataService } from '../../services/data.service';
+
+@Component({
+  selector: 'app-subjects',
+  templateUrl: './subjects.component.html',
+  styleUrls: ['./subjects.component.css']
+})
+export class SubjectsComponent implements OnInit {
+  horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  subjectdataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+  loading:boolean = true;
+  subjectdisplayedColumns: any;
+  issubject: boolean = false;
+  //subjectdataSource: any = [];
+  
+  constructor(private dialog: MatDialog, private dataService: DataService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { 
+    this.getSubjects();
+  }
+
+  ngOnInit(): void {
+    this.subjectdisplayedColumns = ["sn","subject","id"]
+    this.getSubjects();
+  }
+  
+  openDialog() {
+    const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "80%";
+        //dialogConfig.height="90%";
+    this.dialog.open(AddsubjectComponent, dialogConfig).afterClosed().subscribe(dialogData=>{
+      this.getSubjects();
+    });
+  }
+
+  getSubjects(){
+    this.dataService.getSubjects('907').subscribe(result=>{
+
+      this.loading = false;
+      this.subjectdataSource = result.data;
+      this.changeDetectorRef.detectChanges();
+      console.log(result.data);
+
+    },errorResponse=>{
+      this.loading = false;
+      console.log("Error: "+errorResponse);
+      if(errorResponse && errorResponse.message){
+        //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
+        this.openSnackBar(errorResponse.message, "warning-snackbar");
+      }
+      else {
+        this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
+      } 
+    });
+  }
+
+  onDelete(subjectid: any){
+    this.dataService.deleteSubject(subjectid).subscribe(result=>{
+
+      this.loading = false;
+      this.getSubjects();
+      // this.subjectdataSource = result.data;
+      // this.changeDetectorRef.detectChanges();
+      console.log(subjectid);
+      console.log(result);
+      
+      this.openSnackBar(result.description, "warning-snackbar");
+      
+
+    },errorResponse=>{
+      this.loading = false;
+      console.log("Error: "+errorResponse);
+      if(errorResponse && errorResponse.message){
+        //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
+        this.openSnackBar(errorResponse.message, "warning-snackbar");
+      }
+      else {
+        this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
+      } 
+    });
+  }
+
+
+  openSnackBar(message: string, type:string) {
+    this.snackBar.open(message, 'close', {
+      duration: 5000,
+      panelClass: [type],
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
+  }
+
+
+
+}

@@ -1,0 +1,20 @@
+
+export const environment = {
+  production: false,
+  //baseUrl: 'http://154.118.230.107:9011/', //'http://192.168.43.196:9088/', 
+  baseUrl: 'http://127.0.0.1:9088/', //'http://192.168.43.196:9088/', 
+  //attachmentBaseUrl: 'http://154.118.230.107:9011/uploads/contents?file=',
+  attachmentBaseUrl: 'http://127.0.0.1:9088/uploads/contents?file=',
+  GENDER_TYPES:[{'Name':'Male'}, {'Name':'Female'}],
+  MARITAL_STATUS:[{'Name':'Single', 'Value': 0,}, {'Name':'Married', 'Value': 1}],
+  TITLES: [{'name':'Mr.'}, {'name':'Mrs.'},{'name':'Dr.'},{'name':'Ms.'}],
+  YES_NO_CHOICES: [{'Name': 'Yes', 'Value': 1}, {'Name': 'No', 'Value': 0}],
+  MONTH_NAMES:[{'Name':'January', 'Id':1}, {'Name':'February', 'Id':2}, {'Name':'March', 'Id':3}, {'Name':'April', 'Id':4}, {'Name':'May', 'Id':5},
+  {'Name':'June', 'Id':6}, {'Name':'July', 'Id':7},  {'Name':'August', 'Id':8}, {'Name':'September', 'Id':9}, {'Name':'October', 'Id':10},
+  {'Name':'November', 'Id':11}, {'Name':'December', 'Id':12}],
+  Originalities: [{'Name': 'Tanzania Mainland'}, {'Name': 'Tanzania Zanzibar'}],
+  LANGUAGES:[{'id':1, 'name':'English'}, {'id':2, 'name':'Kiswahili'}, {'id':3, 'name':'Others'}],
+  DISABILITIES: [{'Name': 'Not Applicable', 'Value': 0},{'Name': 'Visual', 'Value': 1}, {'name': 'Physical', 'Value': 2}],
+  FIRST_LEVEL_TIMER: 10,
+  SECOND_LEVEL_TIMER: 1,
+};

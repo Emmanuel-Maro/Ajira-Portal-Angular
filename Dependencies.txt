@@ -1,0 +1,9 @@
+1) LightboxModule     npm install --save ngx-lightbox
+import { LightboxModule } from 'ngx-lightbox';
+
+
+2)CountdownModule     npm i ngx-countdown
+import { CountdownModule } from 'ngx-countdown';
+
+
+

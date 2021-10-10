@@ -1,0 +1,91 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        My Applications</mat-toolbar>
+    <mat-card-content>
+        <mat-form-field floatLabel="never">
+            <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+            <button mat-button matPrefix mat-icon-button (click)="onSearchClear()">
+             <mat-icon color="accent">search</mat-icon>
+           </button>
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()" *ngIf="searchKey">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Application Status</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <div fxLayout="column">
+                        <div>
+                            <p class="mobile-label">Status:</p>
+                            <strong>{{appStatus(element.isShortlisted)}}</strong>
+                        </div>
+                        <div *ngIf="!element.isShortlisted"><strong>{{element.statusReason}}</strong></div>
+                        <div *ngIf='element.isShortlisted && !element.interviewCategory'><strong>Interview No: </strong>{{element.interviewNumber}}</div>
+                        <div *ngIf='element.isShortlisted && !element.interviewCategory'><button mat-button color="accent" (click)="viewTimeTable(element.advertId)" style="padding:0">View Timetable</button></div>
+                        <!--<div *ngIf='element.reasonForNotShortlisted'>{{element.reasonForNotShortlisted | uppercase}}</div>-->
+                    </div>
+                    
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Job Title</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div fxLayout="column">
+                        <div><strong>Employer: </strong> {{element.employerName}} </div>
+                        <div><strong>Job Post: </strong> {{element.title}} </div>
+                    </div>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="applicationDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Date Applied</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Date Applied:</span>
+                    {{element.date | date:'dd MMMM yyyy'}} 
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="closeDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Close Date</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Close Date:</span>
+                    {{element.closeDate | date:'dd MMMM yyyy'}} 
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>Letter </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <input type="file" #inputFile [hidden]="true" (change)="onFileChange($event, row.advertId)" accept="application/pdf">
+                    <a mat-icon-button color="warn" href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview application letter" >
+                        <mat-icon color="primary">attachment</mat-icon>
+                    </a><br>
+                    <button *ngIf="showApplicationLetter(row.closeDate,row.date)" mat-icon-button color="primary" (click)="inputFile.click()" title="replace your application letter" 
+                    [ngStyle.xs]="{'width':'100px'}"  [ngStyle.sm]="{'width':'100px'}" [ngStyle.md]="{'width':'100px'}">
+                        <!--<i class="fa fa-exchange"></i>--> replace letter
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="loading">
+                <mat-footer-cell *matFooterCellDef colspan="5">
+                    <div class="loader"></div>
+                    loading data...
+                </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="noData" >
+                <mat-footer-cell *matFooterCellDef colspan="5"> No data... </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || dataSource.data.length > 0}"></mat-footer-row>
+        </mat-table>
+        <mat-paginator [length]="dataSource.data.length" [pageSizeOptions]="[10, 25,50,100]" [pageIndex]="0" [pageSize]="10" showFirstLastButtons></mat-paginator>                          
+    </mat-card-content>
+</mat-card> 

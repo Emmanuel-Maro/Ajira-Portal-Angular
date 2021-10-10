@@ -1,0 +1,13 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<mat-icon>menu</mat-icon-->Declaration</mat-toolbar>
+    <mat-card-content> 
+        <p><input type="checkbox" [disabled]="disabled" [(ngModel)]="checked">  I declare that the information provided is complete and correct to the best of my knowledge. I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed. </p>
+        <p><strong><code>N.B Ticking the box will be taken as being as binding as your signature</code></strong></p>
+        <button mat-raised-button color="accent" (click)='onDeclaration()' [disabled]='disabled'>Declare</button>
+    </mat-card-content>
+</mat-card> 

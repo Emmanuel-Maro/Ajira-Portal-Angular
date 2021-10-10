@@ -1,0 +1,64 @@
+
+
+.mat-column-actions {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 12% !important;
+  width: 12% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-dateFrom, .mat-column-dateTo{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/************* Mobile **************************/
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 780px) {
+  .mat-toolbar mat-toolbar-single-row{
+    height: 25px;
+    font-size: .85em;
+  }
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+    padding-right: 7px;
+    font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 3px;
+  }
+  .mat-column-dateFrom, .mat-column-dateTo,.mat-column-actions{
+    width: 100% !important;
+  }
+
+}

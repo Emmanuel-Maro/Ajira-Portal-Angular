@@ -1,0 +1,51 @@
+
+.mat-card .mat-card-content {
+    font-size: 1rem;
+    line-height: 23px;
+    padding: 0px 24px;
+}
+
+.visibility-icon{
+    cursor: pointer;
+    margin-right: 7px;
+}
+
+/************* Mobile **************************/
+.mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  @media(max-width: 600px) {
+    .mat-card .mat-card-content {
+      font-size: 1rem;
+      line-height: 23px;
+      padding: 5px 0px;
+    }
+    .mobile-label {
+      width: 100px;
+      display: inline-block;
+      padding-right: 7px;
+      font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 5px 3px;
+    }
+  
+    .mat-column-AttachmentType{
+      width: 100% !important;
+    }
+  
+  }
+  

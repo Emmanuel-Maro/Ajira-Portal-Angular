@@ -1,0 +1,30 @@
+
+.formclass{
+    padding: 10px;
+}
+
+.box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax( calc(250px + 3vw), 1fr));
+}
+.school-table{
+  width: 100%;
+  padding: 10px;
+}
+.selected{
+  padding: 10px;
+  
+}
+.mat-column-region{
+  padding-left: 10px;
+}
+.mat-column-council{
+  padding-left: 10px;
+}
+.mat-column-schoolName{
+  padding-left: 10px;
+}
+.mat-column-schoolid{
+  text-align: center;
+}

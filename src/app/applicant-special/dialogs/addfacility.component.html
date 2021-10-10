@@ -1,0 +1,87 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        <span>Add Health Facility</span>
+        <span class="spacer"></span>
+        <mat-icon  (click)="onClose()">close</mat-icon>
+    </mat-toolbar>
+    <mat-card-content>
+        <div class="box">
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select Region</mat-label>
+                    <mat-select [(value)]="selectedregion">
+                        <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select Council</mat-label>
+                    <mat-select [(value)]="selectedregion">
+                        <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select Facility</mat-label>
+                    <mat-select [(value)]="selectedregion">
+                        <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+<!-- 
+
+
+        <table>
+            <tr>
+                <td>
+            <mat-form-field class="formclass">
+                <mat-label>Select Region</mat-label>
+                <mat-select [(value)]="selectedregion">
+                    <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </td>
+            <td>
+            <mat-form-field class="formclass">
+                <mat-label>Select Council</mat-label>
+                <mat-select [(value)]="selectedregion">
+                    <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </td>
+            <td>
+            <mat-form-field class="formclass">
+                <mat-label>Select Facility</mat-label>
+                <mat-select [(value)]="selectedregion">
+                    <mat-option *ngFor="let region of regions" value="{{region.regionId}}">{{region.regionName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            </td>
+        </tr>
+        </table> -->
+
+        <div class="button-row">
+            <button mat-button color="primary" type="button">
+                <mat-icon>save_alt</mat-icon>Save
+            </button>
+            <button type="button" mat-button color="warn" (click)="onClose()">
+                <mat-icon>close</mat-icon>Close
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>    

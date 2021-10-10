@@ -1,0 +1,11 @@
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+
+<div *mkLoadingPage="{checkPendingHttp: true, checkPendingRoute: true}">
+    <mk-material-bar></mk-material-bar>
+</div>
+
+<router-outlet>
+   <!-- <app-spinner></app-spinner> -->
+</router-outlet>

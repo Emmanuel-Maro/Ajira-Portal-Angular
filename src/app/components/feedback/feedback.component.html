@@ -1,0 +1,35 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true">
+    <p style="color: white" > Wait... </p>
+</ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="60" fxFlex.lt-md = "100" fxFlex.md = "60" >
+        <mat-card>
+            <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+                <!--<button mat-icon-button >
+                    <mat-icon>menu</mat-icon>
+                </button>-->
+                Feedback</mat-toolbar>
+            <div class="card-content">
+            <div style="margin:15px; padding-bottom: 9px;">
+            <form [formGroup]="appService.FeedbackForm" (submit)="onSubmit()">
+                <mat-form-field >
+                <input matInput placeholder="Full Name" formControlName='name' autocomplete="off" >
+            </mat-form-field>
+            <mat-form-field >
+                    <input matInput placeholder="Email Address" formControlName='email' autocomplete="off" required >
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea minlength="5"  #comments rows="2" maxlength="500" matInput  placeholder="Comments" formControlName='comment' autocomplete="off" required></textarea>
+                    <mat-hint align="end">{{comments.value.length}} / 500</mat-hint>
+                </mat-form-field>
+                <div>
+                    <mat-hint>Attachment if any(Optional)</mat-hint>
+                    <input type="file"  (change)="onFileChange($event)" accept="application/pdf" #attachmentFile>
+                </div>
+                <button  mat-raised-button color="primary" [disabled]="!appService.FeedbackForm.valid" type="submit" style="margin-top:1rem">Submit</button>
+            </form>
+            </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

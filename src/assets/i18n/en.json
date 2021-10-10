@@ -1,0 +1,153 @@
+{
+  "SidebarMenu": {
+      "HomeMenuName": "Dashboard",
+      "VerificationMenu":{
+        "Header":"Authorization",
+        "MemberAuthorizationMenu":"Member Authorization",
+        "BiometricVerificationMenu": "Biometric Authorization",
+        "Form2CMenu": "Form 2C",
+        "Form2EMenu": "Form 2E",
+        "ReferredPatientsMenu": "Referred Patients",
+        "PostedFormsMenu": "Posted Forms(Form 2c & 2e)",
+        "ServiceEligibilityMenu": "Check Service Eligibility"
+      },
+      "PatientReferralMenu":{
+        "Header":"Patient Referral",
+        "ReferralFormMenu":"Patient Referral Form",
+        "ReferralPatientListMenu": "Referral Patient list"
+      },
+      "ServiceApprovalMenu":{
+        "Header":"Service Approval",
+        "RequestApprovalMenu":"Request Approval",
+        "RequestedApprovalsMenu": "Requested Approvals",
+        "IssuingServiceMenu": "Issuing Service"
+      },
+      "ClaimsManagementMenu":{
+        "Header":"Claims Management",
+        "ClaimRegisterMenu":"Claim Register"
+      },
+      "PharmacyMenu":{
+        "Header":"Pharmacy",
+        "ClaimRegisterMenu":"Claim Register",
+        "PostedForm2cMenu":"Drugs dispensing"
+      },
+      "MembersModuleMenu":{
+        "LinkTitle":"NHIF Member",
+        "MemberDetailsMenu":"Member Details",
+        "ServiceUtilizationMenu":"Service Utilization",
+        "MembersByEmployerMenu":"Members By Employer"
+      },
+      "EmployerModuleMenu":{
+        "LinkTitle":"Employer",
+        "PublishedInvoicesMenu": "Published Invoices",
+        "PaymentNotesMenu": "Payment Notes",
+        "EmployeeListMenu":"Employee List"
+      }
+  },
+  "Header": {
+    "united_republic":"The United Republic of Tanzania",
+    "president_office":"President's Office",
+    "secretariat":"Public Service Recruitment Secretariat",
+    "HomeMenuName": "Home",
+    "Login": "Login",
+    "Registration": "Online Registration",
+    "SettingsMenuName": "Settings",
+    "CompanyName": "National Health Insurance Fund"
+  },
+    "HOME": {
+      "TITLE": "Hello World!",
+      "BROWSER_PREF": "Browser preference: {{ value }}",
+      "TODAYS_DATE": "Today's date",
+      "A_NUMBER": "A number"
+    },
+    "MemberAuthorization": {
+      "CardAuthorization": "Card Authorization",
+      "MemberVerificationLink": "Member Verification",
+      "PatientLastVisitLink": "Patient last visit",
+      "AuthorizedPatientsLink": "Authorized Patients",
+      "Form2cLink": "Form 2C",
+      "Form2eLink": "Form 2E",
+      "ReferredPatientsLink": "Referred Patients",
+      "VisitTypePlaceholder":"Select visit type",
+      "IDTypePlaceholder":"Select ID Type",
+      "ReasonsForEmergency": "Reasons for Emergency",
+      "SearchButtonText": "Search",
+      "AuthorizeButtonText": "Authorize",
+      "PatientDetails": "Patient details",
+      "MembershipNo" : "Membership No",
+      "FullName" : "Full Name",
+      "Gender" : "Gender",
+      "DateOfBirth" : "Date Of Birth",
+      "ProductName":"Product Name",
+      "AuthorizationNo": "Authorization No",
+      "AuthorizationStatus": "Authorization Status",
+      "Remarks": "Remarks",
+      "CardStatus": "Card Status",
+      "IsValidCard":"IsValidCard",
+      "IsActive":"IsValidCard",
+      "LastVisitedFacilities":"Last Visited Facilities"
+    },
+    "ClaimRegistrationForm": {
+      "Title": "Claim Registration",
+      "CreateButton": "New",
+      "ClaimNo": "Claim No",
+      "ClaimYear":"Claim Year",
+      "ClaimMonth":"Claim Month",
+      "NumberOfFolios":"Number of Folios",
+      "AmountClaimed":"Amount Claimed",
+      "Status": "Status"
+    },
+    "ClaimFolios": {
+      "Title": "Folio Register",
+      "CreateButton": "New",
+      "SubmitButton": "Submit"
+    },
+    "ClaimDataEntryForm": {
+      "Title": "In/Out Patient Claim Form",
+      "SearchButton": "Search",
+      "AutoSubmitText": "auto submit",
+      "SerialNo": "Serial No.",
+      "CardNo":"Card No.",
+      "FirstName": "First Name",
+      "LastName": "Last Name",
+      "Gender": "Gender",
+      "DateOfBirth":"Date of Birth",
+      "AttendanceDate": "Attendance Date",
+      "PreliminaryDiagnosisCode":"Preliminary Diagnosis (Code)",
+      "AuthorizationNo":"Authorization No.",
+      "TelephoneNo":"Telephone No.",
+      "PatientFileNo": "Patient File No.",
+      "PatientType": "Patient Type",
+      "DateAdmitted": "Date Admitted",
+      "DateDischarged": "Date Discharged",
+      "PractitionerName": "Practitioner Name",
+      "FinalDiagnosisCode":"Final Diagnosis (Code)",
+      "CostOfService":"Cost of Service(s)",
+      "FolioItemForm": {
+        "Title":"Service Items",
+        "ItemType":"Item Type",
+        "ItemDetails": "Item Details",
+        "Quantity": "Item Quantity",
+        "DoseDuration": "Dose Duration(Days)",
+        "UnitPrice": "Unit Price",
+        "AmountClaimed": "Amount Claimed",
+        "ApprovalRefNo": "Approval Reference No.",
+        "SaveButton": "Save",
+        "CloseButton": "Close"
+      },
+      "SaveButton": "Save",
+      "CloseButton": "Close"
+    },
+    "DischargeForm":{
+      "Title": "Dishcharge Form",
+      "CloseButton": "Close",
+      "DischargeButton": "Discharge Patient"
+    },
+    "Footer": {
+      "Copyright": "Public Service Recruitment Secretariat. All rights reserved.",
+      "PrivacyPolicy": "Privacy Policy",
+      "CompanyTerms": "Terms & Conditions",
+      "Disclaimer": "Disclaimer",
+      "Designer": "Designed and developed by"
+    }
+}

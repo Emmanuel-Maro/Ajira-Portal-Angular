@@ -1,0 +1,54 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div style="padding: 20px;">
+    <mat-card>
+        <mat-toolbar 
+        [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+            <!--<button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>-->Applicant Teaching Subject</mat-toolbar>
+            <mat-card-content> 
+                <div style="margin-bottom:.5rem" fxShow="false" fxShow.md="true" fxShow.lg="true"  fxShow.xl="true"  ><button mat-raised-button (click)="openDialog()"><mat-icon>add_circle</mat-icon>Add New</button></div>
+                <div style="margin-bottom:.5rem" fxShow="false" fxShow.xs="true" fxShow.sm="true"><button mat-mini-fab color="primary" (click)="openDialog()" title="add new">+</button></div>
+                
+                <table mat-table [dataSource]="subjectdataSource" class="subject-table">
+                    <ng-container matColumnDef="sn">
+                        <th mat-header-cell *matHeaderCellDef> SN </th>
+                        <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="subject">
+                        <th mat-header-cell *matHeaderCellDef> Subject Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.subject.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element"> 
+                            <button type="button" mat-icon-button color="warn" title="delete"
+                            (click)="onDelete(element.id)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="loading">
+                        <mat-footer-cell *matFooterCellDef colspan="5">
+                            <div class="loader"></div>
+                            loading data...
+                        </mat-footer-cell>
+                    </ng-container>
+                    <ng-container  *ngIf="!issubject" >
+                        <mat-footer-cell *matFooterCellDef colspan="5"> No Subject Added </mat-footer-cell>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="subjectdisplayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: subjectdisplayedColumns;"></tr>
+                    <!-- <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || subjectdataSource.data.length > 0}"></mat-footer-row> -->
+                </table>
+                    
+            </mat-card-content>
+    </mat-card>
+</div>

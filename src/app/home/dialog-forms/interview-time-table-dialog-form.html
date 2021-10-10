@@ -1,0 +1,45 @@
+
+    <mat-card>
+      <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>list</mat-icon>
+        </button>
+        <span>Advert Interviews Timetable </span>
+        <span class="spacer"></span>
+        <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+     </mat-toolbar>
+     <mat-card-header>
+        <mat-card-title>{{ post | uppercase }}</mat-card-title>
+        <mat-card-subtitle>{{ employer | uppercase }}</mat-card-subtitle>
+     </mat-card-header>
+     <mat-card-content>
+        <div class="mat-elevation-z8">
+          <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="interviewTitle">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Interview Title</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{translateCategory(element.interviewCategory)}}
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="venue">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Venue </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                  {{element.interviewVenue}}
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="interviewDate">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Interview Date</mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.interviewDate | date:'short'}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+     </mat-card-content>
+     <p>Kwa Taarifa zaid Tembelea <a href="https://www.ajira.go.tz" target="_blank">www.ajira.go.tz</a></p>
+    </mat-card>
+
+ 
+    

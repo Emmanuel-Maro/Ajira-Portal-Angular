@@ -1,0 +1,12 @@
+<div>
+        <mat-toolbar style="background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+            <h1 style="font-size: 1.8rem;">Job Application <span style="color:darkred;font-weight: bold">FAILED</span></h1> <mat-icon style="color: rgb(161, 37, 37);">{{type}}
+
+            </mat-icon>
+        </mat-toolbar>
+        <p style="padding-left: 1em; font-size: 1.1rem;">{{message}}</p>
+
+    <div  fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button  color="primary"  [mat-dialog-close]="true">Ok </button>
+    </div>
+</div>

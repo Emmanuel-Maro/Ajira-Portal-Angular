@@ -1,0 +1,50 @@
+
+ #footer{
+    font-size: .85em;
+    background: #fff;
+    color: #000;
+    border-top: 1px solid #ccc;
+}
+
+#footer a, mat-list-item a{
+    color: #1e2325;
+}
+footer .mat-card{
+    background: none;
+}
+footer .mat-card.company-address{
+    margin-top:0px;
+}
+footer .mat-card .mat-card-content {
+    font-size: 1rem;
+    line-height: 23px;
+    padding: 0px;
+}
+footer ul{
+    margin: 0;
+}
+footer mat-card mat-label{
+    color: #20a8d8; font-size: .75em; font-weight: 700;
+}
+footer ul li, footer ul li a{
+    color: #fff;
+    font-size: .80em;
+    line-height: 1.3;
+}
+mat-list-item a{
+    padding-left: 5px;
+}
+
+footer .shop-buy-Items{
+    margin-bottom: 1em;
+}
+
+footer img.social-media-icon{
+    border-radius: 9px;
+}
+
+.copy_right{
+    text-align: center;
+    display: inline-block; 
+    width: 100%;
+}

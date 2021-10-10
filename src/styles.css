@@ -1,0 +1,272 @@
+/* You can add global styles to this file, and also import other style files */
+/*  Designed and developed by Said A. Juma  ******/
+/*  Email: sidefine@gmail.com  ******/
+/*  Mob 0675 826 709  /0787284384 ******/
+mat-dialog-container.mat-dialog-container{
+    overflow-x: hidden !important;
+  }
+
+.orange-progress .mat-progress-bar-fill::after {
+    background-color: orange !important;
+  }
+  
+  .yellow-progress .mat-progress-bar-fill::after {
+    background-color: yellow !important;
+  }
+  ::ng-deep .mat-progress-bar {
+    border-radius: 2px;
+  }
+
+.mat-nav-list.mat-list-base {
+    padding-top: 0px;
+}
+
+.home-toolbar.mat-toolbar-single-row{
+    height:41px;
+}
+
+.mat-form-field-required-marker{
+    color:red;
+}
+.controls-container{
+    margin: 0px 15px;
+}
+
+div.main-container mat-toolbar.mat-primary {
+    background: #fafafa;
+    color: #000; 
+} 
+.heartbit::before {
+    -webkit-animation: 2.5s blow 0s linear infinite;
+    animation: 2.5s blow 0s linear infinite;
+    position: absolute;
+    content: '';
+    width: 29px;
+    height: 29px;
+    top: 7px;
+    left: 5px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+
+.confirm-dialog-container .mat-dialog-container{
+	border-radius: .25em .25em .4em .4em;
+	padding:0;
+    padding-bottom: .5em;
+}
+
+.hide{
+    display: none;
+}
+/*ng-select */
+div .ng-select  .ng-select-container {
+    color: rgba(0,0,0,0.87);
+    -webkit-box-align: baseline;
+    align-items: baseline;
+    min-height: 46.5px;
+}
+.ng-select.ng-invalid.ng-touched{
+    border:1px solid rgb(228, 91, 91);
+  }
+/* mat-table */
+mat-table mat-cell:first-of-type, mat-table mat-footer-cell:first-of-type, mat-table mat-header-cell:first-of-type {
+    padding-left: 7px;
+}
+mat-footer-row mat-footer-cell{
+    justify-content: center;
+    font-style: italic;
+}
+
+.mat-header-row {
+    min-height: 47px;
+}
+
+.mat-header-row > .mat-header-cell {
+    font-weight: bold;
+    border: 1px solid gainsboro;
+    padding: 0px 0px 0px 4px;
+    color:#2a3f54;
+    background-color: #c8ced3;
+    
+}
+.mat-cell {
+    padding: 0px 7px 0px 7px;
+    color:#2a3f54;
+}
+.mat-cell, .mat-footer-cell {
+    font-size: 13px;
+}
+/******/
+/*.mat-header-cell {
+    color: black;
+    font-weight: bold;
+    word-wrap: break-word;
+    word-break:break-all;
+  }  */
+
+.mat-cell {
+    word-wrap: break-word;
+    word-break: break-word;
+  }   
+
+/* overriding default css settings **/
+ng-dropdown-panel.ng-dropdown-panel {
+    position: relative;
+}
+
+mat-dialog-container.mat-dialog-container {
+    display: block;
+    padding: 5px;
+    border-radius: 9px;
+}
+.normal-form{
+    padding: 9px;
+}
+.spacer {
+    flex: 1 1 auto;
+}
+
+p a.selected {
+    border-right: 5px solid  #e4b54c;
+    margin:  0px;
+    margin-right:3px;
+    font-weight: 600;
+    line-height: 23px;
+    display: block;
+}
+
+.loader {
+    border: 5px solid #f3f3f3;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    border-top: 5px solid #555;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* sidebar menu */
+
+  .mat-accordion .mat-expansion-panel-content {
+    display: flex;
+    flex-direction: column;
+    font: 400 .8em Poppins, sans-serif;
+    overflow: visible;
+    background: #212123a6;
+    color: #fff;
+}
+
+.mat-accordion .mat-expansion-panel-body {
+    padding: 3px 0px 3px 7px;
+}
+
+.mat-accordion .mat-expansion-panel-header {
+    padding: 0 9px;
+}
+/* **** */
+#dashboard .mat-card-header{
+    padding: 12px 0px;
+}
+#dashboard .mat-card-header-text {
+    margin: 0;
+}
+
+#dashboard .box{
+    box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+}
+
+#dashboard .mat-card.box{
+    margin:0px;
+    min-height: 125px;
+    margin-bottom: 15px;
+}
+
+/** mat-snack-bar background color setting *****/
+.mat-snack-bar-container.success-snackbar {
+    background: #cbead2;
+    color: #000;
+}
+.mat-snack-bar-container.info-snackbar {
+    background: #4ccde4;
+    color:#000;
+}
+.mat-snack-bar-container.warning-snackbar {
+    background: #fff3cd;
+    color:#000;
+}
+.mat-snack-bar-container.danger-snackbar {
+    background: #f8d7da;
+    color:#000;
+}
+
+/*** Action Buttons(submition) ***/
+.button-row{
+    margin-top: 1rem;
+  }
+  
+  .button-row button{
+    margin-right:1rem;
+  }
+
+  /*.page-wrapper .mat-drawer-content .mat-sidenav-content{
+      border:1px solid red;
+      margin-left:0px;
+  }*/
+
+
+ /* mat-sidenav-content {
+    margin-left: 0 !important;
+    flex: 1 1 auto;
+}*/
+/*
+mat-sidenav {
+    flex: 0 1 auto;
+}*/
+
+mat-toolbar .mat-icon{
+    cursor: pointer;
+}
+
+#toolbar{
+    height: 31px;
+}
+/***** Mobile ***********/
+@media(max-width: 780px) {
+    .mat-paginator-range-actions .mat-paginator-range-label {
+        margin: 0px;
+    }
+    app-sidebar .mat-raised-button {
+        font-size: .75rem;
+        color: #34344f;
+    }
+    mat-toolbar span{
+        font-size: .75rem;
+        text-align: left;
+    }
+    .mat-toolbar-single-row {
+      height: 25px !important;
+      font-size: .85em !important;
+    }
+  .mat-dialog-container .mat-card .mat-card-content{ 
+    font-size: .75rem;
+    line-height: 23px;
+    margin:  0px !important;
+    padding: 0px !important;
+  } 
+  .mat-icon{
+      font-size: 18px;
+  }
+}

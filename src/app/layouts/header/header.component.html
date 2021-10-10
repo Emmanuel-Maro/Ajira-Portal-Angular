@@ -1,0 +1,93 @@
+<div color="primary" [ngStyle.xl]="{'font-weight': 'bold', 'color': '#fff', 'background-image': 'url(assets/images/banner.png)', 'background-repeat': 'no-repeat', 'background-size': '100% 100%'}"
+    [ngStyle.lg]="{'font-weight': 'bold', 'color': '#fff', 'background-image': 'url(assets/images/banner.png)', 'background-repeat': 'no-repeat', 'background-size': '100% 100%'}"
+    [ngStyle.md]="{'font-weight': 'bold', 'color': '#fff', 'background-image': 'url(assets/images/banner.png)', 'background-repeat': 'no-repeat', 'background-size': '100% 100%'}"
+    [ngStyle.sm]="{'font-weight': 'bold', 'color': '#fff', 'background-image': 'url(assets/images/banner_sm.png)', 'background-repeat': 'no-repeat', 'background-size': '100% 100%'}"
+    [ngStyle.xs]="{'font-weight': 'bold', 'color': '#fff',  'background-color': '#0f749d'}">
+        <div   fxLayout="row" fxLayoutAlign="start center">
+            <div  fxFlex="30">
+                <img fxShow="false"  fxShow.xs="true" alt="homepage" class="light-logo" height="80px" src="assets/images/logo-lg-icon.jpg">
+            </div>
+            <div fxFlex="70">
+                <h3 [ngStyle.xl]="{'font-size': '.95rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}" 
+                    [ngStyle.lg]="{'font-size': '.85rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.md]="{'font-size': '.8rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.sm]="{'font-size': '.75rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.xs]="{'font-size': '.6rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}" >The United Republic of Tanzania</h3>
+                
+                <h3 [ngStyle.xl]="{'font-size': '1.2rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.lg]="{'font-size': '1.1rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.md]="{'font-size': '.9rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.sm]="{'font-size': '.85rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.xs]="{'font-size': '.65rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}">President's Office</h3>  
+                
+                <h3 [ngStyle.xl]="{'font-size': '1.3rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.lg]="{'font-size': '1.2rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.md]="{'font-size': '1.1rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.sm]="{'font-size': '1.0rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}"
+                    [ngStyle.xs]="{'font-size': '0.7rem', 'margin': '0', 'color': '#fff', 'font-family': 'Verdana, Geneva, Tahoma, sans-serif', 'font-weight':'bold', 'text-shadow':'3px 3px 5px rgb(0 0 0)'}">Public Service Recruitment Secretariat</h3> 
+                </div>
+        </div>
+    </div>
+
+    <mat-card>
+        <div class="toolbar" >
+            <div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="start start">
+                <button mat-button  [routerLink]="['/home']" routerLinkActive="selected"  
+                    [ngStyle.xs]="{ 'width': '100%'}"
+                    [ngStyle.sm]="{ 'width': '100%'}">
+                        <i class="fa fa-search fa-2x"></i>Vacancies
+                </button>
+                <a mat-button [routerLink]="['/resource-centre']"  routerLinkActive="selected"
+                [ngStyle.xs]="{'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}">
+                    <i class="fa fa-question-circle-o fa-2x"></i>
+                    Instructions & Guidelines
+                </a>
+
+                <a *ngIf='isAuthenticated()' mat-button [routerLink]="['/applicant/my-applications']" routerLinkActive="selected"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}">
+                    <mat-icon>playlist_add</mat-icon>My Applications
+                </a>
+                
+
+                <a *ngIf='isAuthenticated()' mat-button [routerLink]="['/subscription']" routerLinkActive="selected"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}">
+                    <mat-icon>add_alert</mat-icon>Register to Job Alerts
+                </a>
+                <a *ngIf='isAuthenticated()' mat-button [routerLink]="['/change-password']" routerLinkActive="selected"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}">
+                    <mat-icon>swap_horiz</mat-icon>Change Password
+                </a>
+
+                <a *ngIf='isAuthenticated()' mat-button [routerLink]="['/applicant/notification']" routerLinkActive="selected"
+                class="notification-badge-accent" matBadge="{{not_count}}" matBadgePosition="after" 
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}">
+                    <mat-icon>notifications</mat-icon>Notifications
+                </a>
+
+                <a  mat-button [routerLink]="['/feedback']" routerLinkActive="selected"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 1px 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 1px 0px', 'width': '100%'}">
+                    <i class="fa fa-commenting-o fa-2x"></i> Feedback
+                </a>
+                <a *ngIf='!isAuthenticated()' mat-button  [routerLink]="['/login']"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"><i class="fa fa-sign-in fa-2x"></i> Login</a>
+                <a *ngIf='!isAuthenticated()' mat-button  [routerLink]="['/register']"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"><i class="fa fa-user-plus fa-2x"></i> Register</a>
+               <span class="spacer"></span>
+                <button *ngIf='isAuthenticated()' mat-button [ngStyle.xs]="{'font-size.px': '10', 'width': '100%'}" (click)="logOut()"
+                [ngStyle.xs]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"
+                [ngStyle.sm]="{ 'border': '1px solid #ccc', 'border-width': '1px 0px 0 0px', 'width': '100%'}"><i class="fa fa-sign-out fa-2x" ></i> Sign Out</button>
+            </div>
+        </div>
+    </mat-card>
+
+
+
+

@@ -1,0 +1,39 @@
+
+mat-card{
+    margin: 3px 7px;
+}
+
+.msg::before {
+    -webkit-animation: 2.5s blow 0s linear infinite;
+    animation: 2.5s blow 0s linear infinite;
+    position: absolute;
+    content: '';
+    width: 29px;
+    height: 29px;
+    top: 7px;
+    left: 5px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+a.selected{
+    background-color: #0f749d;
+    color:#fff;
+}
+
+a.mat-button, a.mat-raised-button {
+    font-family: Poppins, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.toolbar{
+    background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;
+}
+
+.notification-badge-accent .mat-badge-content {
+    background-color: red;
+    color: white;
+}
+
