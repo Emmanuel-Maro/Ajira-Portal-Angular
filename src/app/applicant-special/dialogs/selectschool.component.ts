@@ -173,6 +173,10 @@ export class SelectschoolComponent implements OnInit {
       this.openSnackBar("You can only choose five Schools","warning-snackbar");
     }
 
+    this.canSaveFn();
+  }
+
+  canSaveFn(){
     if(this.selectedschoolsdataArray.length == 5){
       this.canSaveSChools = true;
     }
@@ -189,7 +193,7 @@ export class SelectschoolComponent implements OnInit {
    }
    this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
    console.log(this.selectedschoolsdataArray);
-
+   this.canSaveFn();
   }
 
   ngOnInit(): void {
@@ -197,12 +201,12 @@ export class SelectschoolComponent implements OnInit {
     //console.log(this.data.name);
     this.selectedschoolsdataArray = this.data.schoolFromParent;
     this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
-    this.canSaveSChools = true;
+    this.canSaveFn();
   }
 
   onClose(){
     //data to parent
-    this.matDialogRef.close({"jina":"from child"});
+    this.matDialogRef.close({"selectedSchools":[]});
   }
 
   onSave(){
