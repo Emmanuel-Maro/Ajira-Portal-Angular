@@ -1,7 +1,6 @@
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
     <p style="color: white" > Loading... </p>
 </ngx-spinner>
-<div style="padding: 20px; background-color: none;">
     <mat-card>
         <mat-toolbar 
         [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
@@ -12,7 +11,7 @@
             <!--<button mat-icon-button>
                 <mat-icon>menu</mat-icon>
             </button>-->Applicant Schools</mat-toolbar>
-            <mat-card-content style="margin-top: 10px;"> 
+            <mat-card-content> 
                 <div style="margin-bottom:.5rem" fxShow="false" fxShow.md="true" fxShow.lg="true"  fxShow.xl="true"  ><button mat-raised-button (click)="openDialog()"><mat-icon>add_circle</mat-icon>Add/Edit</button></div>
                 <div style="margin-bottom:.5rem" fxShow="false" fxShow.xs="true" fxShow.sm="true"><button mat-mini-fab color="primary" (click)="openDialog()" title="add new">+</button></div>
             </mat-card-content>  
@@ -49,5 +48,3 @@
 
             <app-attachletter *ngIf="canAttach"></app-attachletter>
     </mat-card>
-    
-</div>

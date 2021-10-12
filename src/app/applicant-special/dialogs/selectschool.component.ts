@@ -13,7 +13,9 @@ export class SelectschoolComponent implements OnInit {
   loading:boolean = true;
   canAddSchool: boolean = false;
   canSaveSChools: boolean = false;
+  isSchoolAdded: boolean = false;
   requestobj: any;
+  selectedSchoolsObj: any;
   selectedregionid: string;
   selectedregion: any;
   selectedcouncilid: string;
@@ -71,7 +73,7 @@ export class SelectschoolComponent implements OnInit {
   //When Region is selected - get councils
   onRegionSelected(){
     this.councils = [];
-
+    this.canAddSchool = false;
     //Get Selected region object
     this.selectedregion = this.regions.find(i => i.code === this.selectedregionid);
     //console.log(this.selectedregion.name);
@@ -109,6 +111,7 @@ export class SelectschoolComponent implements OnInit {
   //When Counsil Selected - get Schools
   onCouncilSelected(){
     this.schools = [];
+    this.canAddSchool = false;
     //Get Selected Council Object
     this.selectedcouncil = this.councils.find(i => i.code === this.selectedcouncilid);
     //console.log(this.selectedcouncil.name);
@@ -147,7 +150,8 @@ export class SelectschoolComponent implements OnInit {
 
       //get selected School object
      this.selectedshool = this.schools.find(i => i.id === this.selectedschoolid);
-     //console.log(this.selectedshool.schoolName);
+    //  console.log(this.selectedshool.schoolName);
+    //  console.log(this.selectedshool.id);
 
     }
     else{
@@ -159,15 +163,22 @@ export class SelectschoolComponent implements OnInit {
   onSchoolAdded(){
     if(this.selectedschoolsdataArray.length < 5 ){
 
-      // if((this.selectedschoolsdataArray.find(i => i.schoolid === this.selectedshool.id)).length > 0){
-      //   this.openSnackBar("School already added","warning-snackbar");
-      // }
-      // else{
-        this.selectedschoolsdataArray.push({"region":this.selectedregion.name,"council":this.selectedcouncil.name,"schoolName":this.selectedshool.schoolName,"schoolid":this.selectedshool.id});
-        this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
-        console.log(this.selectedschoolsdataArray);
-        //this.changeDetectorRef.detectChanges();
-      //}
+      this.isSchoolAdded = false;
+      for(var i = 0; i < this.selectedschoolsdataArray.length; ++i){
+        if (this.selectedschoolsdataArray[i].schoolName == this.selectedshool.schoolName) {
+          this.openSnackBar("School already selected","warning-snackbar");
+          this.isSchoolAdded = true;
+          break;
+        }
+      }
+
+      if(this.isSchoolAdded == false){
+        
+          this.selectedschoolsdataArray.push({"id":"","region":this.selectedregion.name,"councilid":this.selectedcouncil.id,"council":this.selectedcouncil.name,"schoolName":this.selectedshool.schoolName,"schoolid":this.selectedshool.id});
+          this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
+          //console.log(this.selectedschoolsdataArray);
+      
+      }
     }
     else{
       this.openSnackBar("You can only choose five Schools","warning-snackbar");
@@ -185,14 +196,46 @@ export class SelectschoolComponent implements OnInit {
     }
   }
 
-  onSchoolDeleted(schoolid:any){
+  onSchoolDeleted(deletedschoolName:any){
+    console.log(this.selectedschoolsdataArray);
     for (var i = this.selectedschoolsdataArray.length - 1; i >= 0; --i) {
-      if (this.selectedschoolsdataArray[i].schoolid == schoolid) {
-        this.selectedschoolsdataArray.splice(i,1);
+      if (this.selectedschoolsdataArray[i].schoolName == deletedschoolName) {
+
+        if(this.selectedschoolsdataArray[i].id !=""){
+          this.loading = true;
+          
+          //Delete from database
+          
+          this.dataService.deleteEducationSchoolById(this.selectedschoolsdataArray[i].id).subscribe(result=>{
+            //console.log('SchoolName: '+this.selectedschoolsdataArray[i].schoolName+' ID: '+this.selectedschoolsdataArray[i].id);
+            if(result.description == "Application Deleted"){
+              //Delete from Array
+              this.selectedschoolsdataArray.splice(i,1);
+              this.openSnackBar("Subject Deleted", "warning-snackbar");
+            }
+            else{
+              this.openSnackBar("Subject not deleted", "warning-snackbar");
+            }
+
+            this.loading = false;
+            this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
+            //this.changeDetectorRef.detectChanges();
+
+          });
+        }
+
+        else if(this.selectedschoolsdataArray[i].id ==""){
+          //Delete from Array
+          this.selectedschoolsdataArray.splice(i,1);
+          this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
+          this.openSnackBar("Subject Deleted", "warning-snackbar");
+          //console.log('SchoolName: '+this.selectedschoolsdataArray[i].schoolName+' New Record ');
+        }
+        break;
       }
    }
-   this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
-   console.log(this.selectedschoolsdataArray);
+   
+   //console.log(this.selectedschoolsdataArray);
    this.canSaveFn();
   }
 
@@ -206,11 +249,48 @@ export class SelectschoolComponent implements OnInit {
 
   onClose(){
     //data to parent
-    this.matDialogRef.close({"selectedSchools":[]});
+    this.matDialogRef.close({"selectedSchools":this.selectedschoolsdataArray});
   }
 
+
   onSave(){
-    this.matDialogRef.close({"selectedSchools":this.selectedschoolsdataArray});
+    //Get selectect schools
+    this.selectedSchoolsObj = '{"advertId": 3130, "applicantChoicesModels": [';
+    for (var i = 0; i <= this.selectedschoolsdataArray.length - 1; ++i) {
+      this.selectedSchoolsObj = this.selectedSchoolsObj.concat('{"councilCode":'+ this.selectedschoolsdataArray[i].councilid + ', "id": '+this.selectedschoolsdataArray[i].schoolid+'}');
+      if(i < this.selectedschoolsdataArray.length - 1){
+        this.selectedSchoolsObj = this.selectedSchoolsObj.concat(',');
+      }
+    }
+    this.selectedSchoolsObj = this.selectedSchoolsObj.concat(']}');
+
+    console.log(this.selectedSchoolsObj);
+    
+    
+    this.dataService.addEducationSchools(this.selectedSchoolsObj).subscribe(result =>{
+      this.loading = false;
+      console.log(result.data);
+      this.openSnackBar(result.description, "warning-snackbar");
+
+      //Go to parrent
+      this.matDialogRef.close({"selectedSchools":this.selectedschoolsdataArray});
+      //console.log(this.schools);
+      //this.changeDetectorRef.detectChanges();
+
+    },errorResponse=>{
+      this.loading = false;
+      console.log("Error: "+errorResponse);
+      if(errorResponse && errorResponse.message){
+        //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
+        this.openSnackBar(errorResponse.message, "warning-snackbar");
+      }
+      else {
+        this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
+      } 
+
+      this.changeDetectorRef.detectChanges();
+
+    });
   }
 
   openSnackBar(message: string, type:string) {

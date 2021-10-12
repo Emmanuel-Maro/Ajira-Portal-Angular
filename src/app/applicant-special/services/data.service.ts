@@ -42,6 +42,17 @@ export class DataService {
     return this.httpClient.post(environment.baseUrl + 'api/v1/school-requirement/school/',requestobj).pipe(catchError(this.handleError));
   }
 
+  addEducationSchools(selectedSchoolsObj:any): Observable<any>{
+    return this.httpClient.post(environment.baseUrl + 'api/v1/education-application/',selectedSchoolsObj).pipe(catchError(this.handleError));
+  }
+
+  getEducationSchools(applicantid:any): Observable<any>{
+    return this.httpClient.get(environment.baseUrl + 'api/v1/education-application/applicant/'+applicantid).pipe(catchError(this.handleError));
+  }
+
+  deleteEducationSchoolById(id:any): Observable<any>{
+    return this.httpClient.delete(environment.baseUrl + 'api/v1/education-application/id/'+id).pipe(catchError(this.handleError));
+  }
   
   
 
