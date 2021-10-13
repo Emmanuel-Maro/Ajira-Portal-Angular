@@ -1,6 +1,5 @@
-.printout-label{
-  font-weight: bold;
-  padding-right:7px;
+.mat-header-row{
+  height: 30px;
 }
 .mat-column-educationLevel {
   word-wrap: break-word !important;

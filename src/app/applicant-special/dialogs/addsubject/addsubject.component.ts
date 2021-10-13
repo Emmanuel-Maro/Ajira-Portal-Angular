@@ -12,7 +12,7 @@ import { cosh } from 'core-js/core/number';
 export class AddsubjectComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  loading:boolean = true;
+  loading:boolean = false;
   mySelections: string[];
 
   addSubjectJson: String;

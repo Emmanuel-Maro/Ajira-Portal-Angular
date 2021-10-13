@@ -73,6 +73,7 @@ export class SelectschoolComponent implements OnInit {
   //When Region is selected - get councils
   onRegionSelected(){
     this.councils = [];
+    this.schools = [];
     this.canAddSchool = false;
     //Get Selected region object
     this.selectedregion = this.regions.find(i => i.code === this.selectedregionid);

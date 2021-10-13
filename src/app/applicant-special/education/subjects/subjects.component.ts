@@ -13,18 +13,20 @@ export class SubjectsComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   subjectdataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
+  isSubjectSelected: boolean = false;
   loading:boolean = true;
   subjectdisplayedColumns: any;
-  issubject: boolean = false;
   //subjectdataSource: any = [];
   
   constructor(private dialog: MatDialog, private dataService: DataService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { 
     this.getSubjects();
+    this.isSubjectSelected = false;
   }
 
   ngOnInit(): void {
     this.subjectdisplayedColumns = ["sn","subject","id"]
     this.getSubjects();
+    this.isSubjectSelected = false;
   }
   
   openDialog() {
@@ -43,8 +45,16 @@ export class SubjectsComponent implements OnInit {
 
       this.loading = false;
       this.subjectdataSource = result.data;
+
+      if(result.data == null ){
+        this.isSubjectSelected = true;
+      }
+      else{
+        this.isSubjectSelected = false;
+      }
+      
       this.changeDetectorRef.detectChanges();
-      console.log(result.data);
+      //console.log(result.data);
 
     },errorResponse=>{
       this.loading = false;
@@ -65,13 +75,9 @@ export class SubjectsComponent implements OnInit {
       this.loading = false;
       this.getSubjects();
       // this.subjectdataSource = result.data;
-      // this.changeDetectorRef.detectChanges();
-      console.log(subjectid);
-      console.log(result);
-      
+      this.changeDetectorRef.detectChanges();
       this.openSnackBar(result.description, "warning-snackbar");
       
-
     },errorResponse=>{
       this.loading = false;
       console.log("Error: "+errorResponse);
