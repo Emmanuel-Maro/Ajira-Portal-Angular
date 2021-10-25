@@ -99,7 +99,7 @@ export class EducationComponent implements OnInit {
       this.schoolloading = false;
       console.log(result.data);
 
-      if(result.data.length > 0 ){
+      if(result.data.length > 0 || result.data == null){
         this.isSchoolSelected = true;
       }
       else{

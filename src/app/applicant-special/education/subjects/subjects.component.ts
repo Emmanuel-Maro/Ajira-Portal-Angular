@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig, MatMenuTrigger, MatPaginator, MatSnackBar, 
 import { NgIdleService } from '../../../applicant/service/ng-idle.service';
 import { AddsubjectComponent } from '../../dialogs/addsubject/addsubject.component';
 import { DataService } from '../../services/data.service';
+import { DialogService } from "../../../shared/service/dialog.service";
 
 @Component({
   selector: 'app-subjects',
@@ -18,7 +19,7 @@ export class SubjectsComponent implements OnInit {
   subjectdisplayedColumns: any;
   //subjectdataSource: any = [];
   
-  constructor(private dialog: MatDialog, private dataService: DataService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { 
+  constructor(private dialog: MatDialog, private dataService: DataService, private dialogService: DialogService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { 
     this.getSubjects();
     this.isSubjectSelected = false;
   }
@@ -76,7 +77,7 @@ export class SubjectsComponent implements OnInit {
       this.getSubjects();
       // this.subjectdataSource = result.data;
       this.changeDetectorRef.detectChanges();
-      this.openSnackBar(result.description, "warning-snackbar");
+      this.dialogService.openAlertDialog("Message",result.description, "");
       
     },errorResponse=>{
       this.loading = false;

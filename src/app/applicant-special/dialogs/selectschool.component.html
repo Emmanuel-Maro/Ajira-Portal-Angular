@@ -1,7 +1,5 @@
 <div class="container">
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
-    <p style="color: white"> Wait... </p>
-</ngx-spinner>
+
 <mat-card style="padding:0; margin:0;">
     <mat-toolbar
         style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
@@ -12,6 +10,9 @@
         <span class="spacer"></span>
         <mat-icon (click)="onClose()">close</mat-icon>
     </mat-toolbar>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="selectloading"></mat-progress-bar>
+
 
     <mat-card-content>
 

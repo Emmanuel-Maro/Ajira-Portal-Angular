@@ -3,6 +3,7 @@ import { MatDialogRef, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVe
 import {FormControl, Validators} from '@angular/forms';
 import { DataService } from '../../services/data.service';
 import { cosh } from 'core-js/core/number';
+import { DialogService } from '../../../shared/service/dialog.service';
 
 @Component({
   selector: 'app-addsubject',
@@ -12,7 +13,8 @@ import { cosh } from 'core-js/core/number';
 export class AddsubjectComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
-  loading:boolean = false;
+  loading:boolean = true;
+  selectloading: boolean = false;
   mySelections: string[];
 
   addSubjectJson: String;
@@ -22,7 +24,7 @@ export class AddsubjectComponent implements OnInit {
     {subjectCode : "hst",name: "History"},
     {subjectCode : "ksw", name: "Kiswahili"}
   ];
-  constructor(public matDialogRef: MatDialogRef<AddsubjectComponent>, private dataService: DataService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef) { 
+  constructor(public matDialogRef: MatDialogRef<AddsubjectComponent>, private dataService: DataService, private snackBar: MatSnackBar, private dialogService: DialogService, private changeDetectorRef: ChangeDetectorRef) { 
     
   }
 
@@ -52,22 +54,25 @@ export class AddsubjectComponent implements OnInit {
     else{
 
       if(this.mySelections.length == 1){
-        this.addSubjectJson = '{ "applicantId": 907,"teachingSubject": [{ "subjectCode": "'+ this.mySelections[0] +'" }]}';
+        this.addSubjectJson = '{ "teachingSubject": [{ "subjectCode": "'+ this.mySelections[0] +'" }]}';
       }
       else if(this.mySelections.length == 2){
-        this.addSubjectJson = '{ "applicantId": 907,"teachingSubject": [{ "subjectCode": "'+ this.mySelections[0] +'" },{ "subjectCode": "'+ this.mySelections[1] +'" }]}';
+        this.addSubjectJson = '{ "teachingSubject": [{ "subjectCode": "'+ this.mySelections[0] +'" },{ "subjectCode": "'+ this.mySelections[1] +'" }]}';
       }
+
+      this.selectloading = true;
       this.dataService.addSubject(this.addSubjectJson).subscribe(result =>{
 
-        this.loading = false;
+        this.selectloading = false;
         console.log("Message is: "+result.message);
         console.log(result);
-        this.openSnackBar(result.description, "warning-snackbar");
+        //this.openSnackBar(result.description, "warning-snackbar");
+        this.dialogService.openAlertDialog("Message",result.description, "");
         this.changeDetectorRef.detectChanges();
         this.onClose();
   
       },errorResponse=>{
-        this.loading = false;
+        this.selectloading = false;
         console.log("Error: "+errorResponse);
         if(errorResponse && errorResponse.message){
           //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");

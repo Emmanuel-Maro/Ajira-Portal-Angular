@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Inject, OnInit, Optional } from '@angular/core';
 import { MatDialogRef, MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatTableDataSource, MAT_DIALOG_DATA } from '@angular/material';
+import { DialogService } from '../../shared/service/dialog.service';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -11,6 +12,7 @@ export class SelectschoolComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
   loading:boolean = true;
+  selectloading: boolean = false;
   canAddSchool: boolean = false;
   canSaveSChools: boolean = false;
   isSchoolAdded: boolean = false;
@@ -33,7 +35,7 @@ export class SelectschoolComponent implements OnInit {
 
 
   constructor(public matDialogRef: MatDialogRef<SelectschoolComponent>, private dataService: DataService, private snackBar: MatSnackBar, private changeDetectorRef: ChangeDetectorRef, 
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, private dialogService: DialogService) {
     this.getRegions();
     this.onSchoolSelected();
    }
@@ -68,6 +70,8 @@ export class SelectschoolComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
     });
+
+    
   }
 
   //When Region is selected - get councils
@@ -75,13 +79,14 @@ export class SelectschoolComponent implements OnInit {
     this.councils = [];
     this.schools = [];
     this.canAddSchool = false;
+    this.selectloading = true;
     //Get Selected region object
     this.selectedregion = this.regions.find(i => i.code === this.selectedregionid);
     //console.log(this.selectedregion.name);
 
     this.requestobj = '{"firstSubjectCode": "phy", "regionCode": "'+this.selectedregionid+'","secondSubjectCode": "chm" }';
     this.dataService.getCouncils(this.requestobj).subscribe(result =>{
-      this.loading = false;
+      this.selectloading = false;
       this.councils = result.data || [];
       if(this.councils.length <= 0){
         this.openSnackBar("No School Found", "warning-snackbar");
@@ -91,7 +96,7 @@ export class SelectschoolComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
     },errorResponse=>{
-      this.loading = false;
+      this.selectloading = false;
       console.log("Error: "+errorResponse);
       if(errorResponse && errorResponse.message){
         //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
@@ -105,6 +110,7 @@ export class SelectschoolComponent implements OnInit {
 
     });
 
+    
     this.onSchoolSelected();
 
   }
@@ -113,13 +119,14 @@ export class SelectschoolComponent implements OnInit {
   onCouncilSelected(){
     this.schools = [];
     this.canAddSchool = false;
+    this.selectloading = true;
     //Get Selected Council Object
     this.selectedcouncil = this.councils.find(i => i.code === this.selectedcouncilid);
     //console.log(this.selectedcouncil.name);
 
     this.requestobj = '{"firstSubjectCode": "phy", "councilCode": "'+this.selectedcouncilid+'","secondSubjectCode": "chm" }';
     this.dataService.getSchools(this.requestobj).subscribe(result =>{
-      this.loading = false;
+      this.selectloading = false;
       this.schools = result.data || [];
       if(this.schools.length <= 0){
         this.openSnackBar("No School Found", "warning-snackbar");
@@ -128,7 +135,7 @@ export class SelectschoolComponent implements OnInit {
       this.changeDetectorRef.detectChanges();
 
     },errorResponse=>{
-      this.loading = false;
+      this.selectloading = false;
       console.log("Error: "+errorResponse);
       if(errorResponse && errorResponse.message){
         //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
@@ -203,23 +210,24 @@ export class SelectschoolComponent implements OnInit {
       if (this.selectedschoolsdataArray[i].schoolName == deletedschoolName) {
 
         if(this.selectedschoolsdataArray[i].id !=""){
-          this.loading = true;
+          this.selectloading = true;
           
           //Delete from database
           
           this.dataService.deleteEducationSchoolById(this.selectedschoolsdataArray[i].id).subscribe(result=>{
+            this.selectloading = false;
             //console.log('SchoolName: '+this.selectedschoolsdataArray[i].schoolName+' ID: '+this.selectedschoolsdataArray[i].id);
             if(result.description == "Application Deleted"){
               //Delete from Array
               this.selectedschoolsdataArray.splice(i,1);
-              this.openSnackBar("Subject Deleted", "warning-snackbar");
+              this.dialogService.openAlertDialog("Message","Subject Deleted", "");
             }
             else{
-              this.openSnackBar("Subject not deleted", "warning-snackbar");
+              //this.openSnackBar("Subject not deleted", "warning-snackbar");
+              this.dialogService.openAlertDialog("Message",result.description, "");
             }
-
-            this.loading = false;
             this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
+            this.canSaveFn();
             //this.changeDetectorRef.detectChanges();
 
           });
@@ -229,7 +237,7 @@ export class SelectschoolComponent implements OnInit {
           //Delete from Array
           this.selectedschoolsdataArray.splice(i,1);
           this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
-          this.openSnackBar("Subject Deleted", "warning-snackbar");
+          this.dialogService.openAlertDialog("Message","Subject Deleted", "");
           //console.log('SchoolName: '+this.selectedschoolsdataArray[i].schoolName+' New Record ');
         }
         break;
@@ -267,9 +275,9 @@ export class SelectschoolComponent implements OnInit {
 
     console.log(this.selectedSchoolsObj);
     
-    
+    this.selectloading = true;
     this.dataService.addEducationSchools(this.selectedSchoolsObj).subscribe(result =>{
-      this.loading = false;
+      this.selectloading = false;
       console.log(result.data);
       this.openSnackBar(result.description, "warning-snackbar");
 
@@ -279,7 +287,7 @@ export class SelectschoolComponent implements OnInit {
       //this.changeDetectorRef.detectChanges();
 
     },errorResponse=>{
-      this.loading = false;
+      this.selectloading = false;
       console.log("Error: "+errorResponse);
       if(errorResponse && errorResponse.message){
         //this.dialogService.openAlertDialog("Error", errorResponse.message, "error");
