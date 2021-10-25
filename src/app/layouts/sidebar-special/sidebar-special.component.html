@@ -13,11 +13,11 @@
   <div *ngIf='isAuthenticated()' class="navigation-menu" fxLayout="column">
     <a mat-raised-button [routerLink]="['/applicant/dashboard']" routerLinkActive="selected"><mat-icon>home</mat-icon>Home</a>
     <a mat-raised-button [routerLink]="['/applicant/education']" *ngIf="showEducation">Education Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/subjects']" *ngIf="showEducation">Add Teaching Subjects</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/schools']" *ngIf="showEducation">Select Schools</a>
+    <a mat-raised-button [routerLink]="['/applicant/education/subjects']" *ngIf="showEducation">Teaching Subjects</a>
+    <a mat-raised-button [routerLink]="['/applicant/education/schools']" *ngIf="showEducation">Schools</a>
     <a mat-raised-button [routerLink]="['/applicant/health']" *ngIf="showHealth">Health Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/health/selectfacility']" *ngIf="showHealth">Select Facility (Choices)</a>
+    <a mat-raised-button [routerLink]="['/applicant/health/selectfacility']" *ngIf="showHealth">Facilitie (Choices)</a>
     <!-- <a mat-raised-button [routerLink]="['/applicant/education/letter']" *ngIf="showEducation" >Attach Letter</a> -->
-    <a mat-raised-button [routerLink]="['/applicant/health/letter']" *ngIf="showHealth">Attach Letter</a>
+    <!-- <a mat-raised-button [routerLink]="['/applicant/health/letter']" *ngIf="showHealth">Attach Letter</a> -->
   </div>
 </div>
