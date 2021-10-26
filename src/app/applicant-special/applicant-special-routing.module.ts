@@ -48,7 +48,7 @@ const routes: Routes = [
             component:HealthComponent
           },
           {
-            path:'selectfacility',
+            path:'facilities',
             component:SelectfacilityComponent
           },
           {
