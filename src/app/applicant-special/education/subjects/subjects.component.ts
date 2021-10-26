@@ -67,6 +67,8 @@ export class SubjectsComponent implements OnInit {
       else {
         this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
       } 
+
+      this.changeDetectorRef.detectChanges();
     });
   }
 

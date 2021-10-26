@@ -174,7 +174,7 @@ export class SelectschoolComponent implements OnInit {
       this.isSchoolAdded = false;
       for(var i = 0; i < this.selectedschoolsdataArray.length; ++i){
         if (this.selectedschoolsdataArray[i].schoolName == this.selectedshool.schoolName) {
-          this.openSnackBar("School already selected","warning-snackbar");
+          this.openSnackBar("This school is already selected","warning-snackbar");
           this.isSchoolAdded = true;
           break;
         }

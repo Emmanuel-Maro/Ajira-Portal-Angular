@@ -43,8 +43,10 @@
                 <mat-header-row *matHeaderRowDef="schooldisplayedColumns"></mat-header-row >
                 <mat-row *matRowDef="let row; columns: schooldisplayedColumns;"></mat-row>
                 <mat-footer-row *matFooterRowDef="['schoolloading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
-                <mat-footer-row *matFooterRowDef="['noSchoolData']" [ngClass]="{'hide':!isSchoolSelected }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noSchoolData']" [ngClass]="{'hide':isSchoolSelected }"></mat-footer-row>
             </mat-table>
 
+            <!-- Attach application letter -->
+            <div *ngIf="!canAttach && !loading" style="padding: 30px 0 30px 0;" ><strong>Note: In order to attach application letter, first select two subjects and five schools of your choice.</strong></div>
             <app-attachletter *ngIf="canAttach"></app-attachletter>
     </mat-card>
