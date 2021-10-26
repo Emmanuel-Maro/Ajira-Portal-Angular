@@ -1,0 +1,258 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        <span>Academic Qualification</span>
+        <span class="spacer"></span>
+        <mat-icon  (click)="onClose()">close</mat-icon>
+    </mat-toolbar>
+    <mat-card-content> <!--{{applicantService.AcademicQualificationForm.valid |json }}-->
+        <!--{{applicantService.AcademicQualificationForm.value |json }}-->
+        <div *ngIf="!nectaResult">
+            <form [formGroup]="applicantService.AcademicQualificationForm" class="normal-form" (submit)="onSubmit()"> 
+                <mat-dialog-content>
+                    <div  fxLayout="row" fxLayout.xs="column"  fxLayoutAlign="space-between start"> 
+                        <div  fxLayout="column"  fxFlex.xs="100" fxFlex="47"  style="width: 100%;" >
+                            <div>
+                                <ng-select 
+                                    [items]="educationLevels"
+                                    [selectOnTab]="true"
+                                    [clearable]="false"
+                                    (change)="onSelectedEducationLevel()"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    formControlName="levelId"
+                                    placeholder="Education Level">
+                                </ng-select>
+                            </div>
+                            <button style="text-align: left;" (click)="onLostAcademicCertificate()"  mat-button color="warn" *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value === 1 && (applicantService.AcademicQualificationForm.controls['levelId'].value == 8 || applicantService.AcademicQualificationForm.controls['levelId'].value == 9)">click here if you have lost your certificate</button>
+                            <div style="margin:.5rem 0px">
+                                <ng-select
+                                    [items]="countries"
+                                    [selectOnTab]="true"
+                                    [clearable]="false"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    formControlName="countryId"
+                                    (change)="onCountrySelect()"
+                                    placeholder="Select Country">
+                                </ng-select>
+                            </div> <!--{{applicantService.AcademicQualificationForm.controls['countryId'].value === 1 && (applicantService.AcademicQualificationForm.controls['levelId'].value !== 8 && applicantService.AcademicQualificationForm.controls['levelId'].value !== 9) | json}}-->
+                            <div style="margin:.5rem 0px" *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value === 1 && (applicantService.AcademicQualificationForm.controls['levelId'].value !== 8 && applicantService.AcademicQualificationForm.controls['levelId'].value !== 9)">
+                                <ng-select
+                                    [items]="academicInstitutions"
+                                    [selectOnTab]="true"
+                                    [clearable]="false"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    placeholder="Institution Name"
+                                    formControlName="institutionId">
+                                </ng-select>
+                            </div>
+                            <mat-form-field  *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value !== 1 || applicantService.AcademicQualificationForm.controls['levelId'].value === 8 || applicantService.AcademicQualificationForm.controls['levelId'].value === 9">
+                                <input matInput placeholder="Institute Name(Specify)" formControlName='otherInstitutionName'>
+                            </mat-form-field>
+                            <div style="margin: .75rem" *ngIf="isCertificateShown">
+                                <div><mat-hint>Attach  Certificate</mat-hint></div>
+                                <div><a *ngIf="data.operation == 'Update'" href="{{attachmentBaseUrl + data.dialogData.attachmentUrl}}" target="_blank" style="padding-right: 1rem;">view certificate</a></div>
+                                <input type="file"  (change)="onCertificateAttach($event)" accept="application/pdf" #certificateFile>   
+                            </div>
+                          
+                            <div style="margin: .75rem 0px" *ngIf="isTranscriptShown">
+                                <div><a *ngIf="data.operation == 'Update'" href="#" style="padding-right: 1rem;">view transcript</a></div>
+                                <div><mat-hint>Attach transcript</mat-hint></div>
+                                <input type="file" (change)="onTranscriptAttach($event)" accept="application/pdf" placeholder="Attach your transcript" #transcriptFile>
+                            </div>
+                            
+                            <div style="margin: .75rem 0px" *ngIf="isTCUCertificateShown">
+                                <div><a *ngIf="data.operation == 'Update'" href="#">view TCU Verification Certificate</a></div>
+                                <div><mat-hint>Attach TCU  Verification Certificate</mat-hint></div>
+                                <input type="file" (change)="onTCUCertificateAttach($event)" accept="application/pdf" #tcuCertificateFile>
+                            </div>
+                            <div style="margin: .75rem 0px" *ngIf="isNACTEShown">
+                                <div><a *ngIf="data.operation == 'Update'" href="#">view NACTE  Verification Certificate</a></div>
+                                <div><mat-hint style="padding-right: 1rem;">Attach NACTE  Verification Certificate</mat-hint></div>
+                                <input type="file" (change)="onNACTECertificateAttach($event)" accept="application/pdf" #nacteCertificateFile>
+                            </div>
+                            <div style="margin: .75rem 0px" *ngIf="isNECTAShown">
+                                <div><a *ngIf="data.operation == 'Update'" href="#">view NECTA  Verification Certificate</a></div>
+                            <div><mat-hint>Attach NECTA  Verification Certificate</mat-hint></div>
+                                <input type="file" (change)="onNECTACertificateAttach($event)" accept="application/pdf" #nectaCertificateFile>
+                            </div>
+                        </div>
+                        <div  fxLayout="column" fxFlex="47" fxFlex.xs="100" style="width: 100%;">
+                            <div style="margin:.5rem 0px">
+                                <ng-select
+                                    [items]="programmeNames"
+                                    [selectOnTab]="true"
+                                    [clearable]="false"
+                                    bindLabel="name"
+                                    bindValue="id"
+                                    (change)="onProgrammeChange()"
+                                    formControlName="programmeId"
+                                    placeholder="Programme Name">
+                                </ng-select>
+                            </div>
+                            
+                            <mat-form-field *ngIf="selectedProgrammeCategory">
+                                <input matInput [disabled]='true' readonly placeholder="Programme Category" [(ngModel)]='selectedProgrammeCategory.categoryName' class="auto-fill-field" [ngModelOptions]="{standalone: true}">
+                            </mat-form-field>
+                            <!--<div *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value !== 1"> 
+                                <ng-select 
+                                        [items]="programmeCategories"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        bindLabel="categoryName"
+                                        bindValue="categoryId"
+                                        formControlName="programmeCategoryId"
+                                        placeholder="Programme Category">
+                                </ng-select>
+                            </div>-->
+                          
+                           <!-- <mat-form-field *ngIf="applicantService.AcademicQualificationForm.controls['programmeId'].value === 99999">
+                                <input matInput placeholder="Programme Name(Specify)" formControlName='otherProgrammeName'>
+                            </mat-form-field>-->
+                            <div fxLayout="row" fxLayout.xs="column">
+                                <div fxFlex="48" style="margin-right: .5rem;">
+                                    <ng-select
+                                        [items]="yearsFrom"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        (change)="onYearFromSelect()"
+    
+                                        bindLabel="year"
+                                        bindValue="year"
+                                        placeholder="Year From:"
+                                        formControlName="yearFrom">
+                                    </ng-select>
+                                </div>
+                                <div fxFlex="48"  style="margin-left: .5rem;">
+                                    <ng-select
+                                        [items]="yearsTo"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        (change)="onYearToSelect()"
+                                        bindLabel="year"
+                                        bindValue="year"
+                                        placeholder="Year To:"
+                                        formControlName="yearTo">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value !== 1 && (applicantService.AcademicQualificationForm.controls['levelId'].value == 8 || applicantService.AcademicQualificationForm.controls['levelId'].value == 9)" >
+                                <mat-checkbox [(ngModel)]="hasEquivalanceNumber" [ngModelOptions]="{standalone: true}">I have equivalance number</mat-checkbox>
+                                <mat-form-field  floatLabel="never" *ngIf="hasEquivalanceNumber">
+                                    <input matInput  placeholder="Enter equivalance Number" formControlName='equivalanceNumber' (keyup)="onEquivalanceNumberTyping($event)" autocomplete="off">
+                                </mat-form-field>
+                            </div>
+                            
+                            <div fxLayout="row" *ngIf="applicantService.AcademicQualificationForm.controls['levelId'].value !== 1 && applicantService.AcademicQualificationForm.controls['levelId'].value !== 8 && applicantService.AcademicQualificationForm.controls['levelId'].value !== 9">
+                                <div fxFlex="48" style="margin-right: 1rem;">
+                                    <mat-form-field floatLabel="never">
+                                        <input matInput placeholder="GPA (eg. 4.5 Out Of 5)" formControlName='gpaPoints' autocomplete="off">
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="48">
+                                    <mat-form-field >
+                                        <input matInput placeholder="Out Of" formControlName='gpaTotal' autocomplete="off">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <mat-form-field *ngIf="(applicantService.AcademicQualificationForm.controls['levelId'].value == 8 || applicantService.AcademicQualificationForm.controls['levelId'].value == 9) && (applicantService.AcademicQualificationForm.controls['countryId'].value === 1)">
+                                <input matInput placeholder="Index Number(e.g S1234-5678)" formControlName='indexNumber' autocomplete="off" (keyup)="onStartTyping($event)" maxlength="10">
+                            </mat-form-field>
+                            <div *ngIf="applicantService.AcademicQualificationForm.controls['countryId'].value == 1 && (applicantService.AcademicQualificationForm.controls['levelId'].value == 8 || applicantService.AcademicQualificationForm.controls['levelId'].value == 9)">
+                                <section >
+                                    <mat-radio-group [(ngModel)]="divisionSection" [ngModelOptions]="{standalone: true}" (change)="radioChange($event)">
+                                    <mat-radio-button  value="Division" style="margin-right: .5rem;">Division System</mat-radio-button>
+                                    <mat-radio-button  value="Merit">Merit System</mat-radio-button>
+                                    </mat-radio-group>
+                                </section>
+                                <div *ngIf="divisionSection === 'Division'" fxLayout="row">
+                                    <div fxFlex="48" style="margin-right: 1rem;">
+                                        <ng-select
+                                            [items]="divisions"
+                                            [selectOnTab]="true"
+                                            [clearable]="false"
+                                            bindLabel="division"
+                                            bindValue="division"
+                                            (change)="onDivisionSelect()"
+                                            placeholder="Division (eg. 1 Points 7)"
+                                            formControlName="division">
+                                        </ng-select>
+                                    </div>
+                                    <div fxFlex="48">
+                                        <ng-select
+                                            [items]="points"
+                                            [selectOnTab]="true"
+                                            [clearable]="false"
+                                            bindLabel="point"
+                                            bindValue="point"
+                                            placeholder="Points"
+                                            formControlName="divisionPoints">
+                                        </ng-select>
+                                    </div>
+                                </div>
+                                <div *ngIf="divisionSection === 'Merit'">
+                                    <ng-select
+                                        [items]="meritValues"
+                                        [selectOnTab]="true"
+                                        [clearable]="false"
+                                        bindLabel="value"
+                                        bindValue="value"
+                                        placeholder="Merit Value"
+                                        formControlName="meritValue">
+                                    </ng-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <!-- <hr>-->
+                </mat-dialog-content>
+                <div class="button-row">
+                    <button mat-button  color="primary" type="submit"><mat-icon>save_alt</mat-icon>Save</button>
+                    <button type="button" mat-button color="warn" (click)="onClose()"><mat-icon>close</mat-icon>Close</button>
+                </div>
+            </form>
+        </div>
+        <mat-dialog-content *ngIf="nectaResult">
+        <div style="margin: 1rem 0">
+            <table  cellspacing="0" cellpadding="0" class="mat-table" >
+                <tbody>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>{{nectaResult.particulars.first_name + ' ' + nectaResult.particulars.middle_name + ' ' + nectaResult.particulars.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{nectaResult.particulars.sex | uppercase}}</td>
+                    </tr>
+                    <tr>
+                        <th>Index Number</th>
+                        <td >{{nectaResult.particulars.index_number}}</td>
+                    </tr>
+                    <tr>
+                        <th>Center Name/Number</th>
+                        <td>{{nectaResult.particulars.center_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Division/Points</th>
+                        <td>{{nectaResult.results.division.division + '-' + nectaResult.results.division.points}}</td>
+                    </tr>
+                </tbody>
+            </table> 
+            <div style="text-align: center;">
+                <p style="margin:0px"><code>By clicking the confirm button you agree with <strong>GENERAL CONDITIONS FOR APPLICANTS</strong></code></p>
+            </div>
+            <div class="button-row">
+                <button mat-button  color="primary" type="button" (click)="postAcademicDetails()"><mat-icon>save_alt</mat-icon>Confirm & Save</button>
+                <button type="button" mat-button color="warn" (click)="onClose()"><mat-icon>close</mat-icon>Close</button>
+            </div>
+        </div>
+        </mat-dialog-content>
+    </mat-card-content>
+</mat-card>

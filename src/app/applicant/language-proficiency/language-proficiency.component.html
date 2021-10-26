@@ -1,0 +1,100 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        Language Proficiency</mat-toolbar>
+    <mat-card-content>
+        <form [formGroup]="applicantService.LanguageProficiencyForm" (submit)="onSubmit()"> 
+            <div  fxLayout="column"> 
+                    <div fxFlex="100">
+                        <ng-select
+                            [items]="languages"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="name"
+                            required
+                            placeholder="Select language "
+                            formControlName="language_name">
+                        </ng-select>
+                    </div>
+
+                    <mat-form-field *ngIf="applicantService.LanguageProficiencyForm.controls['language_name'].value === 'Others'">
+                        <input matInput  [(ngModel)]="otherLanguage" placeholder="Other Language Name"  autocomplete="off" required [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                    <div style="margin-bottom: 1rem;">
+                        <div><span style="font-weight: 600;"><mat-label>Speak:</mat-label></span></div>
+                        <mat-radio-group  formControlName="lang_speak">
+                            <mat-radio-button  value="3" style="padding-right: 1rem;">Very Good</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 1rem;">Good</mat-radio-button>
+                            <mat-radio-button  value="1" style="padding-right: 1rem;">Fair</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div><span style="font-weight: 600;"><mat-label>Read:</mat-label></span></div>
+                        <mat-radio-group  formControlName="lang_read">
+                            <mat-radio-button  value="3" style="padding-right: 1rem;">Very Good</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 1rem;">Good</mat-radio-button>
+                            <mat-radio-button  value="1" style="padding-right: 1rem;">Fair</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <div><span style="font-weight: 600;"><mat-label>Write:</mat-label></span></div>
+                        <mat-radio-group  formControlName="lang_write">
+                            <mat-radio-button  value="3" style="padding-right: 1rem;">Very Good</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 1rem;">Good</mat-radio-button>
+                            <mat-radio-button  value="1" style="padding-right: 1rem;">Fair</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <button type="submit" color="accent" [disabled]='!applicantService.LanguageProficiencyForm.valid' mat-raised-button>Add</button>
+        </form>
+        
+        <div style="margin-top:1rem;">
+            <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="languageName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">Name:</span>
+                         {{element.languageName | uppercase}} 
+                        </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="langSpeak">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Speak</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">Speak:</span>
+                         {{translateProficiency(element.langSpeak)}}
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="langRead">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Read</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Read:</span>
+                        {{translateProficiency(element.langRead)}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="langWrite">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Write</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">Write:</span> 
+                        {{ translateProficiency(element.langWrite)}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button type="button" mat-icon-button color="warn" title="delete"
+                            (click)="onDelete(row)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+    </mat-card-content>
+</mat-card> 

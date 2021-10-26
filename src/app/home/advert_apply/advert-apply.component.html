@@ -1,0 +1,24 @@
+
+    <mat-card>
+      <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+       <span>Application Letter Attachment</span>
+     </mat-toolbar>
+        <mat-card-content>
+        <h3>Application Confirmation for PROCUREMENT OFFICER II</h3>
+        <p>I declare that the information provided in my profile is complete and correct to the best of my knowledge and matches the criteria for this Post (PROCUREMENT OFFICER II).</p>
+        <p>I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed.</p>
+        <p>Please attach your Appliation letter Here. <code><strong>(File size Max. 1MB, only pdf)</strong></code></p>
+        
+        <input type="file"  (change)="onFileChange($event)" accept="application/pdf" #inputFile>
+        <hr/>
+        <div>
+          <button *ngIf='applicationLetterIsSigned' mat-raised-button color="primary" (click)="apply()">Confirm Application</button>
+        </div>
+    </mat-card-content>
+    </mat-card>
+
+ 
+    

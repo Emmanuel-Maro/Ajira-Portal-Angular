@@ -1,0 +1,9 @@
+<div>
+        <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">{{title}} <mat-icon color="warn">{{type}}</mat-icon></mat-toolbar>
+        <!--<button mat-icon-button color="warn"> <mat-icon (click)="closeDialog()">close</mat-icon></button>-->
+        <p style="padding-left: 1em;">{{message}}</p>
+
+    <div  fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button mat-raised-button  color="primary"  [mat-dialog-close]="true">Ok </button>
+    </div>
+</div>

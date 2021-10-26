@@ -1,0 +1,15 @@
+
+    <mat-card>
+        <mat-toolbar [ngStyle.lt-lg]="{'font-size.px': 12 }" style="margin-bottom: 5px; height: 40px; font-size: 1em;  background: radial-gradient(#bfbfc4, #fff); color:#000">
+            <mat-icon>menu</mat-icon> Session Timeout
+            <span class="spacer"></span>
+        </mat-toolbar>
+        <mat-card-content>
+           <p>  in the next <countdown [config]="config"  (event)="done($event)"></countdown> seconds. you will be disconnected.</p>
+           <div  class="button-row">
+              <button mat-raised-button (click)='continue()'>Continue</button>
+              <button mat-raised-button (click)='logout()'>Logout</button>
+            </div>
+       </mat-card-content>
+    </mat-card>
+

@@ -1,0 +1,197 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+         <span>CURRICULUM VITAE</span>
+        <span class="spacer"></span>
+        <button mat-icon-button (click)="printCV(true)">
+            <mat-icon>print</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content> 
+        <div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" >
+                <div style="margin-right: 7px;"><img *ngIf="imagePath" class="profile-image" [src]="imagePath | safe" height="115px" /></div>
+                <div *ngIf="applicantDetails.personalDetails">
+                     <h3>{{applicantDetails.personalDetails.firstName + ' ' + applicantDetails.personalDetails.middleName + ' ' + applicantDetails.personalDetails.familyName}}</h3>
+                     <p class="address">{{applicantDetails.contactDetails ? applicantDetails.contactDetails.presentAddress : ''}}</p>
+                     <p class="address">{{tokenParam.userName}}</p>
+                     <p class="address">{{applicantDetails.contactDetails ? applicantDetails.contactDetails.mobileNumber : ''}}</p>
+                </div>
+            </div>
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.personalDetails" >
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="2" class="mat-header-cell"> PERSONAL DETAILS </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Date of Birth</td>
+                        <td class="mat-cell"> {{applicantDetails.personalDetails.dateBirth | date:'dd MMMM yyyy'}}</td>
+                    </tr> 
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Sex</td>
+                        <td class="mat-cell">{{applicantDetails.personalDetails.gender}}</td>
+                    </tr> 
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Marital Status</td>
+                        <td class="mat-cell"> {{translateMaritalStatus(applicantDetails.personalDetails.maritalStatus)}}</td>
+                    </tr> 
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Nationality</td>
+                        <td class="mat-cell">{{applicantDetails.personalDetails.nationality}} </td>
+                    </tr> 
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Place of Birth</td>
+                        <td class="mat-cell"> {{applicantDetails.personalDetails.regionofbirth + ' - ' + applicantDetails.personalDetails.districtofbirth}} </td>
+                    </tr> 
+                </tbody>
+            </table>  
+
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.languageProficiency">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="4" class="mat-header-cell"> LANGUAGE PROFICIENCY </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Language</td>
+                        <td class="mat-cell label">Speak</td>
+                        <td class="mat-cell label">Read</td>
+                        <td class="mat-cell label">Write</td>
+                    </tr> 
+                    <tr *ngFor="let lang of applicantDetails.languageProficiency" class="mat-row">
+                        <td class="mat-cell"> {{lang.languageName}}</td>
+                        <td class="mat-cell"> {{translateProficiency(lang.langSpeak)}} </td>
+                        <td class="mat-cell"> {{translateProficiency(lang.langRead)}} </td>
+                        <td class="mat-cell"> {{translateProficiency(lang.langWrite)}} </td>
+                    </tr>  
+                </tbody>
+            </table>
+
+            <!-- Academic Qualifications-->
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.academicQualifications">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="4" class="mat-header-cell"> ACADEMIC QUALIFICATIONS </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Level</td>
+                        <td class="mat-cell label">Programme</td>
+                        <td class="mat-cell label">Institution</td>
+                        <td class="mat-cell label">Year</td>
+                    </tr> 
+                    <tr *ngFor="let academic of applicantDetails.academicQualifications" class="mat-row">
+                        <td class="mat-cell">{{academic.level}}</td>
+                        <td class="mat-cell">{{academic.programmeName}}</td>
+                        <td class="mat-cell">{{academic.institutionName || academic.institutionNameOther }}</td>
+                        <td class="mat-cell">{{academic.dateTo | date:'yyyy'}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+
+            <!-- Professional Qualification-->
+            <table  cellspacing="0" cellpadding="0" class="mat-table"  *ngIf="applicantDetails.professionalQualifications">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="3" class="mat-header-cell"> PROFESSIONAL QUALIFICATIONS </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Course</td>
+                        <td class="mat-cell label">Institution</td>
+                        <td class="mat-cell label">Year</td>
+                    </tr> 
+                    <tr *ngFor="let prof of applicantDetails.professionalQualifications" class="mat-row">
+                        <td class="mat-cell">{{prof.name || prof.otherCourseName}}</td>
+                        <td class="mat-cell">{{prof.institutionName || prof.otherInstituteName}}</td>
+                        <td class="mat-cell">{{prof.endDate| date:'yyyy' }}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <!-- Working Experience-->
+            <table  cellspacing="0" cellpadding="0" class="mat-table"  *ngIf="applicantDetails.workingExperience">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="4" class="mat-header-cell"> WORKING EXPERIENCE </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Institution/Organization</td>
+                        <td class="mat-cell label">Position	</td>
+                        <td class="mat-cell label">From</td>
+                        <td class="mat-cell label">To</td>
+                    </tr> 
+                    <tr  class="mat-row" *ngFor="let work of applicantDetails.workingExperience">
+                        <td class="mat-cell">{{work.instituteName}}</td>
+                        <td class="mat-cell">{{work.jobTitle}}</td>
+                        <td class="mat-cell">{{work.dateFrom  | date:'MMMM yyyy'}}</td>
+                        <td class="mat-cell">{{ (work.dateTo == null) ? 'To date': work.dateTo | date:'MMMM yyyy'}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+            <!-- Training & Workshop-->
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.training">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="4" class="mat-header-cell">TRAININGS AND WORKSHOPS </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Training Name</td>
+                        <td class="mat-cell label">Institution	</td>
+                        <td class="mat-cell label">From</td>
+                        <td class="mat-cell label">To</td>
+                    </tr> 
+                    <tr  class="mat-row" *ngFor="let tr of applicantDetails.training">
+                        <td class="mat-cell">{{tr.trainingName}}</td>
+                        <td class="mat-cell">{{tr.trainingInstitution}}</td>
+                        <td class="mat-cell">{{tr.startDate | date:'MMMM yyyy'}}</td>
+                        <td class="mat-cell">{{tr.endDate | date:'MMMM yyyy'}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+
+            <!-- COMPUTER LITERACY -->
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.computerLiteracy">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="2" class="mat-header-cell"> COMPUTER LITERACY </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Program</td>
+                        <td class="mat-cell label">Proficiency	</td>
+                    </tr> 
+                    <tr  class="mat-row" *ngFor="let literacy of applicantDetails.computerLiteracy" >
+                        <td class="mat-cell">{{literacy.computerSkillBean}}</td>
+                        <td class="mat-cell">{{translateProficiency(literacy.proficiency)}}</td>
+                    </tr> 
+                </tbody>
+            </table>
+
+            <!-- REFEREES -->
+            <table  cellspacing="0" cellpadding="0" class="mat-table" *ngIf="applicantDetails.referees">
+                <tbody>
+                    <tr  class="mat-row shadow">
+                        <th colspan="4" class="mat-header-cell"> REFEREES </th>
+                    </tr>
+                    <tr  class="mat-row">
+                        <td class="mat-cell label">Name</td>
+                        <td class="mat-cell label">Institution/Organization</td>
+                        <td class="mat-cell label">Title</td>
+                        <td class="mat-cell label">Contacts</td>
+                    </tr> 
+                    <tr  class="mat-row" *ngFor="let ref of applicantDetails.referees">
+                        <td class="mat-cell">{{ref.fullName}}</td>
+                        <td class="mat-cell">{{ref.refereeOrganization}}</td>
+                        <td class="mat-cell">{{ref.refereeTitle}}</td>
+                        <td class="mat-cell"> 
+                            <div><strong>Mobile: </strong> <span>{{ref.telephoneNumber}}</span></div>
+                            <div><strong>Email: </strong> <span>{{ref.emailAddress}}</span></div>
+                        </td>
+                    </tr> 
+                </tbody>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card> 

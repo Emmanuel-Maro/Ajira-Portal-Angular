@@ -1,0 +1,63 @@
+<!--
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">
+        <button mat-icon-button >
+            <mat-icon>add_alert</mat-icon>
+        </button>
+        <span>Subscribed Categories</span>
+        <span class="spacer"></span>
+        <button mat-icon-button  (click)="dismiss()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content>
+        <button mat-stroked-button color="accent"  [disabled]='selection.selected.length == 0' title="unsubscribe selected categories" (click)="unSubscribeSelectedCategories()">
+            <mat-icon>remove_circle</mat-icon>Unsubscribe
+        </button>
+        <div class="mat-elevation-z8" style="margin-top: .5rem;">
+            <mat-table  [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef> 
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                                    [checked]="selection.hasValue() && isAllSelected()"
+                                    [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                                    (change)="$event ? selection.toggle(row) : null"
+                                    [checked]="selection.isSelected(row)">
+                        </mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Subscribed Category </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="subscriptionType">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Subscription Type </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-icon-button [disabled]="false" color="warn" (click)="unSubscribeCategory(row)" title="Unsubscribe">
+                            <mat-icon>remove_circle</mat-icon> unsubscribe
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData" >
+                    <mat-footer-cell *matFooterCellDef colspan="4"> No data... </mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row> 
+            </mat-table>
+            <mat-paginator [length]="dataSource.data.length"  [pageIndex]="0" [pageSize]="25" showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>
+-->

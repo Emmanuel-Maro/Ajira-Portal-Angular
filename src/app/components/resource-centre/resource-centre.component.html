@@ -1,0 +1,52 @@
+
+
+<mat-card id="dashboard"  style="min-height: 300px;">
+  <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">
+    <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>-->
+   <span>Resource Centre</span>
+ </mat-toolbar>
+  <mat-card-content>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <mat-card class="box" fxFlex.xs="100"  fxFlex.sm="48" fxFlex.md="29" fxFlex="32" style="color: #000; background-color:#ccc;">
+          <mat-card-header fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button [routerLink]="['/resource-list']" > <img src="assets/images/icons/pdf-icon.png" height="75px" width = "75px" /></button>
+          <button mat-button [routerLink]="['/resource-list']" ><p style="font-size: 1em; font-weight: 600;">Attachments</p></button>
+          </mat-card-header>
+      </mat-card>
+      <mat-card class="box" fxFlex.xs="100"  fxFlex.sm="48" fxFlex.md="29" fxFlex="32" style="background-color:#ccc; color: #000;">
+          <mat-card-header fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button [routerLink]="['/resource-list']"><img src="assets/images/icons/inpatient-icon.png" height="75px" width = "75px" /></button>
+          <button mat-button [routerLink]="['/resource-list']"><p style="font-size: 1em; font-weight: 600;">Videos</p></button>
+          </mat-card-header>
+      </mat-card>
+
+      <!-- second row-->
+      <!--<mat-card class="box" fxFlex.xs="100"  fxFlex.sm="48" fxFlex.md="29" fxFlex="32" style="background-color: #096abfc2; color: #000;">
+        <mat-card-header fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button [routerLink]="['/service-approval']"><img src="assets/images/icons/approval-icon.png" height="75px" width = "75px" /></button>
+          <button mat-button [routerLink]="['/service-approval']"><p style="font-size: 1em; font-weight: 600;">Service Approval</p></button>
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="box" fxFlex.xs="100"  fxFlex.sm="48" fxFlex.md="29" fxFlex="32" style="background-color: #255a2ebf; color: #000;">
+        <mat-card-header fxLayout="row wrap" fxLayoutAlign="start center">
+        <button mat-button [routerLink]="['/claims']"> <img src="assets/images/icons/claim-icon.png" height="75px" width = "75px" /></button>
+        <button mat-button [routerLink]="['/claims']"><p style="font-size: 1em; font-weight: 600;">Claims Management Service</p></button>
+        </mat-card-header>
+      </mat-card>
+      <mat-card class="box" fxFlex.xs="100"  fxFlex.sm="48" fxFlex.md="29" fxFlex="32" style="background-color: #ffb22bdb; color: #000;">
+          <mat-card-header fxLayout="row wrap" fxLayoutAlign="start center">
+          <button mat-button [routerLink]="['/pharmacy']"><img src="assets/images/icons/pharmaceutical-icon.png" height="75px" width = "75px" /></button>
+          <button mat-button [routerLink]="['/pharmacy']"><p style="font-size: 1em; font-weight: 600;">Pharmaceutical Service</p></button>
+          </mat-card-header>
+      </mat-card>-->
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+
+
+

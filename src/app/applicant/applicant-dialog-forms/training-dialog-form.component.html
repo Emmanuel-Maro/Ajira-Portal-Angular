@@ -1,0 +1,51 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <span>Training & Workshop Attended</span>
+        <span class="spacer"></span>
+        <mat-icon (click)="onClose()">close</mat-icon>
+    </mat-toolbar>
+    <mat-card-content>
+        <form [formGroup]="applicantService.TrainingForm" class="normal-form" (submit)="onSubmit()"> 
+            <div  fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between start"> 
+                <div  fxLayout="column" fxFlex="48"  style="width: 100%;" >
+                    <input type="hidden" formControlName="trainingId">
+                    
+                    <mat-form-field floatLabel="always">
+                        <input matInput  placeholder="Training Name" formControlName='trainingName' autocomplete="off" required>
+                    </mat-form-field>
+                    <mat-form-field floatLabel="always">
+                        <textarea rows="2"  matInput  placeholder="Training Description" formControlName='trainingDescription' autocomplete="off"></textarea>
+                    </mat-form-field>
+                    <div>
+                    <mat-hint>Attach your certificate (optional)</mat-hint>
+                        <input type="file"  (change)="onFileChange($event)" accept="application/pdf" #certificateFile>
+                    </div>
+                </div>
+                <div  fxLayout="column" fxFlex="48"  style="width: 100%;" >
+                    <mat-form-field floatLabel="always">
+                        <input matInput  placeholder="Institution Name" formControlName='trainingInstitution' autocomplete="off" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" color="warn" floatLabel="always">
+                        <mat-label>Start Date:</mat-label>
+                        <input formControlName="startDate"  matInput [matDatepicker]="start_date_picker" (click)="start_date_picker.open()" placeholder="Start Date:" [max]="maxStartDate">
+                        <mat-datepicker-toggle matSuffix [for]="start_date_picker"></mat-datepicker-toggle>
+                        <mat-datepicker #start_date_picker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill" color="warn" floatLabel="always">
+                        <mat-label>End Date:</mat-label>
+                        <input formControlName="endDate"  matInput [matDatepicker]="end_date_picker" (click)="end_date_picker.open()" placeholder="End Date:" (dateChange)="endDateChange($event)" [max]="today">
+                        <mat-datepicker-toggle matSuffix [for]="end_date_picker"></mat-datepicker-toggle>
+                        <mat-datepicker #end_date_picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="button-row">
+                <button mat-button  color="primary" type="submit"><mat-icon>save_alt</mat-icon>Save</button>
+                <button type="button" mat-button color="warn" (click)="onClose()"><mat-icon>close</mat-icon>Close</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

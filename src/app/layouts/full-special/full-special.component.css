@@ -1,0 +1,31 @@
+.page-content{
+    min-height: 70vh;
+}
+
+a.selected {
+    background-color: rgb(42, 63, 84);
+    color: #fff;
+    }   
+    #header-status {
+    float: left;
+    list-style: none;
+}
+#header-status li {
+    float: left;
+    font-size: 12px;
+    margin: 0 26px 0 0;
+}
+::ng-deep.mat-menu-panel {
+  max-width: none !important;
+}
+.mat-menu-item {
+    height:35px;
+    line-height: 35px;
+}
+
+.mat-menu-item a{
+    color:#1F1F34;
+}
+
+select#locale option[value="sw"]    { background-image:url(assets/images/flags/tz.png); }
+select#locale option[value="en-US"] { background-image:url(assets/images/flags/gb.png); }

@@ -1,0 +1,13 @@
+.formclass{
+    padding: 20px;
+}
+
+table{
+  width: 100%;
+}
+
+.box {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax( calc(250px + 3vw), 1fr));
+}

@@ -1,0 +1,40 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar [ngStyle.lt-lg]="{'font-size.px': 12 }" style="margin-bottom: 5px; height: 40px; font-size: 1em;  background: radial-gradient(#bfbfc4, #fff); color:#000">
+        <mat-icon>list</mat-icon> {{title}}
+        <span class="spacer"></span>
+        <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content> 
+        <!--video-->
+        <vg-player (onPlayerReady)="onPlayerReady($event)">
+            <vg-controls>
+                <vg-play-pause></vg-play-pause>
+                <vg-playback-button></vg-playback-button>
+          
+                <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+          
+                <vg-scrub-bar>
+                    <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                    <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+                </vg-scrub-bar>
+          
+                <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+          
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+          
+                <vg-fullscreen></vg-fullscreen>
+            </vg-controls>
+          
+            <video #media [vgMedia]="media" id="singleVideo" preload="auto" crossorigin>
+                <source [src]="src" type="video/mp4">
+            </video>
+         </vg-player>
+    </mat-card-content>
+</mat-card> 

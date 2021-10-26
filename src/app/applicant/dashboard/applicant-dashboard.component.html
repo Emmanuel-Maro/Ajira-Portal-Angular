@@ -1,0 +1,25 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar
+        [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+        <span fxShow="false" fxShow.xl="true" fxShow.lg="true" fxShow.md="true" fxShow.sm="true" fxShow.xs="false">APPLICANT DASHBOARD</span>
+        <span class="spacer"></span>
+        <span style="color: #0f749d; font-weight: 600; padding-right: 19px;font-size: 13px;"> {{userName !== null ? userName : ''}}</span>
+    </mat-toolbar>
+    <mat-card-content> 
+        <div>
+            <mat-progress-bar [color]="color"  mode="determinate" [value]="profileCompleteness"></mat-progress-bar>
+            <mat-hint *ngIf="profileCompleteness >= 0">Profile Completeness <strong>{{profileCompleteness + '%'}}</strong></mat-hint>
+        </div>
+       <h3>APPLICATION TIPS</h3>
+       <p>If you are experiencing additional problems, please give us a feedback <b><a [routerLink]="['/feedback']">here.</a></b></p>
+    </mat-card-content>
+</mat-card> 
+

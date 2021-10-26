@@ -1,0 +1,66 @@
+
+    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+      <p style="color: white" > Loading... </p>
+  </ngx-spinner>
+    <mat-card>
+      <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>-->
+       <span>Available Job Vacancies</span>
+     </mat-toolbar>
+        <mat-card-content>
+          <div class="search-div" *ngIf='vacanciesDataSource && vacanciesDataSource.data.length > 0'>
+            <mat-form-field class="search-form-field" floatLabel="never">
+             <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+             <button mat-button matPrefix mat-icon-button (click)="onSearchClear()">
+              <mat-icon color="accent">search</mat-icon>
+            </button>
+             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()" *ngIf="searchKey">
+               <mat-icon>close</mat-icon>
+             </button>
+             </mat-form-field>
+          </div>
+          <div class="mat-elevation-z8">
+            <mat-table  [dataSource]="vacanciesDataSource" matSort>
+
+                <ng-container matColumnDef="codeNumber">
+                <mat-header-cell *matHeaderCellDef  mat-sort-header>Description </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="display: block; padding-left: 11px"> 
+                  <div style="font-family: Poppins, sans-serif; font-size: 14px; font-weight: 500;"><strong>Post:</strong><a style="color:#0056b3;" [routerLink]="['/home/advert-details', element.advertId]" title="click for more details"> {{element.codeNumber}} - <strong>{{element.totalPost | number}} Post{{(element.totalPost > 1) ? 's':''}}</strong></a></div>
+                  <div style="font-family: Poppins, sans-serif; font-size: 14px; font-weight: 500;"><strong>Employer: </strong> {{element.employerName}} </div>
+                  <a [routerLink]="['/home/advert-details', element.advertId]"  style="color: #3f51b5"><strong>More Details</strong></a>
+                </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="closingDate">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Closing Date </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      <div fxLayout="column">
+                        <div>{{element.closeDate | date }}</div>
+                        <div><button mat-stroked-button (click)="profileCheck(element.advertId)">Apply</button></div> <!-- [routerLink]="['/home/apply', element.advertId]" -->
+                      </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="7">
+                        <div class="loader"></div>
+                        loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData" >
+                    <mat-footer-cell *matFooterCellDef colspan="7"> No data... </mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || vacanciesDataSource.data.length > 0}"></mat-footer-row>
+            </mat-table>
+            <mat-paginator [length]="vacanciesDataSource.data.length" [pageSizeOptions]="[10,25,50,100]" [pageIndex]="0" [pageSize]="10" showFirstLastButtons></mat-paginator>                          
+        </div>
+        </mat-card-content>
+    </mat-card>
+
+ 
+    

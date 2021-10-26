@@ -1,0 +1,50 @@
+
+    <mat-card>
+        <mat-toolbar 
+        [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+            <!--<button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>-->Applicant Schools</mat-toolbar>
+            <mat-card-content> 
+                <div style="margin-bottom:.5rem" fxShow="false" fxShow.md="true" fxShow.lg="true"  fxShow.xl="true"  ><button mat-raised-button (click)="openDialog()"><mat-icon>add_circle</mat-icon>Add/Edit</button></div>
+                <div style="margin-bottom:.5rem" fxShow="false" fxShow.xs="true" fxShow.sm="true"><button mat-mini-fab color="primary" (click)="openDialog()" title="add new">+</button></div>
+            </mat-card-content>  
+            <mat-table [dataSource]="selectedschoolsdataSource" class="school-table">
+                <ng-container matColumnDef="sn">
+                    <mat-header-cell *matHeaderCellDef> SN </mat-header-cell>
+                    <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="region">
+                    <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="council">
+                    <mat-header-cell *matHeaderCellDef> Council </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.council}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="schoolName">
+                    <mat-header-cell *matHeaderCellDef> School Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="schoolloading">
+                    <mat-footer-cell *matFooterCellDef colspan="5">
+                        <div class="loader"></div>
+                        loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noSchoolData" >
+                    <mat-footer-cell *matFooterCellDef colspan="5"> No school selected </mat-footer-cell>
+                </ng-container>
+                
+                <mat-header-row *matHeaderRowDef="schooldisplayedColumns"></mat-header-row >
+                <mat-row *matRowDef="let row; columns: schooldisplayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['schoolloading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noSchoolData']" [ngClass]="{'hide':!isSchoolSelected }"></mat-footer-row>
+            </mat-table>
+
+            <app-attachletter *ngIf="canAttach"></app-attachletter>
+    </mat-card>

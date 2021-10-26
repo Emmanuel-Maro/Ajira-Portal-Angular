@@ -1,0 +1,88 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px;"
+    [ngStyle.xs]="{'height': '28px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.sm]="{'height': '28px', 'font-size': '.75em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.md]="{'height': '32px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.lg]="{'height': '35px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.xl]="{'height': '35px', 'font-size': '1em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        Contact Details
+        <span class="spacer"></span>
+        <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content> 
+       <!-- {{applicantService.ContactDetailsForm.value |json }}-->
+      <form [formGroup]="applicantService.ContactDetailsForm" (submit)="onSubmit()">
+        <mat-dialog-content>
+            <div  fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start"> 
+                <div  fxLayout="column" fxFlex="48">
+                    <ng-select
+                        [items]="countries"
+                        [selectOnTab]="true"
+                        [clearable]="false"
+                        bindLabel="name"
+                        bindValue="id"
+                        (change)="onCountrySelect()"
+                        placeholder="Country Of Residence:"
+                        formControlName="countryResidence">
+                    </ng-select>
+                    <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                        <input  matInput   placeholder="State/City" formControlName="stateCity" autocomplete="off" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                        <input  matInput   placeholder="Province/County" formControlName="countyProvince" autocomplete="off" required>
+                    </mat-form-field>
+                    <div *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                        <ng-select
+                            [items]="regions"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="regionName"
+                            bindValue="regionId"
+                            (change)="onRegionSelect()"
+                            placeholder="Current Resident Region:"
+                            formControlName="region">
+                        </ng-select>
+                    </div>
+                    <div *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                        <ng-select
+                            [items]="districts"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="districtName"
+                            bindValue="districtId"
+                            placeholder="Current Resident District:"
+                            formControlName="district">
+                        </ng-select>
+                    </div>
+                </div>
+                <div  fxLayout="column" fxFlex="48">
+                    <mat-form-field>
+                        <input  matInput   placeholder="mobile No." minlength="10" maxlength="14" formControlName="mobileNumber" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field floatLabel="never">
+                        <input matInput  placeholder="Alternative Email Address" formControlName='alternativeEmail' autocomplete="off" required>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value === 1">
+                        <input type="number" matInput   placeholder="Box Number" formControlName="boxNo" autocomplete="off">
+                    </mat-form-field>
+                    <mat-form-field *ngIf="applicantService.ContactDetailsForm.controls['countryResidence'].value !== 1">
+                        <input  matInput placeholder="Present Address" formControlName="presentAddress" autocomplete="off">
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-dialog-content>
+        <div class="button-row">
+            <button mat-raised-button color="primary" type="submit" >Save</button>
+        </div>
+        
+    </form>
+    </mat-card-content>
+</mat-card> 

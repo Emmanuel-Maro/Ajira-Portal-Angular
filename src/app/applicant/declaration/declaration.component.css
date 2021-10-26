@@ -1,0 +1,22 @@
+.printout-label{
+  font-weight: bold;
+  padding-right:7px;
+}
+
+/************* Mobile **************************/
+.mobile-label {
+  display: none;
+}
+@media(max-width: 780px) {
+  .mat-card .mat-card-content {
+    font-size: 1rem;
+    line-height: 23px;
+    padding: 5px 0px;
+  }
+  
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+        font-weight: bold;
+  }
+}

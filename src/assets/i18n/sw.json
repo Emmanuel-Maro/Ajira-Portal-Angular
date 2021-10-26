@@ -1,0 +1,153 @@
+{
+  "SidebarMenu": {
+      "HomeMenuName": "Dashibodi",
+      "VerificationMenu":{
+        "Header":"Uhakiki",
+        "MemberAuthorizationMenu":"Uhakiki wa Mwanachama",
+        "BiometricVerificationMenu": "Uhakiki wa alama za vidole",
+        "Form2CMenu": "Fomu 2C",
+        "Form2EMenu": "Fomu 2E",
+        "ReferredPatientsMenu": "Wagonjwa wa rufaa",
+        "PostedFormsMenu": "Fomu zilizotumwa",
+        "ServiceEligibilityMenu": "Angalia ustahiki wa huduma"
+      },
+      "PatientReferralMenu":{
+        "Header":"Rufaa ya Mgonjwa",
+        "ReferralFormMenu":"Fomu ya Rufaa",
+        "ReferralPatientListMenu": "Orodha ya Wagonjwa wa Rufaa"
+      },
+      "ServiceApprovalMenu":{
+        "Header":"Uombaji wa Vibali Maalum",
+        "RequestApprovalMenu":"Ombaji Kibali",
+        "RequestedApprovalsMenu": "Vibali Vilivyo ombwa",
+        "IssuingServiceMenu": "Utoaji wa huduma"
+      },
+      "ClaimsManagementMenu":{
+        "Header":"Usimamizi wa Madai",
+        "ClaimRegisterMenu":"Sajili dai"
+      },
+      "PharmacyMenu":{
+        "Header":"Duka la dawa",
+        "ClaimRegisterMenu":"Sajili dai",
+        "PostedForm2cMenu":"Utoaji wa dawa"
+      },
+      "MembersModuleMenu":{
+        "LinkTitle":"Mwanachama",
+        "MemberDetailsMenu":"Taarifa za Mwanachama",
+        "ServiceUtilizationMenu":"Matumizi ya huduma",
+        "MembersByEmployerMenu":"Wanachama kwa kila Mwajiri"
+      },
+      "EmployerModuleMenu":{
+        "LinkTitle":"Mwajiri",
+        "PublishedInvoicesMenu": "Ankara zilizochapishwa",
+        "PaymentNotesMenu": "Vidokezo vya Malipo",
+        "EmployeeListMenu":"Orodha ya Wafanyakazi"
+      }
+    },
+    "Header": {
+      "united_republic":"Jamhuri ya Muungano wa Tanzania",
+      "president_office":"Ofisi ya Rais",
+      "secretariat":"Sekretarieti ya Ajira katika Utumishi wa Umma",
+      "HomeMenuName": "Mwanzo",
+      "Login": "Ingia",
+      "Registration": "Usajili Mtandao",
+      "SettingsMenuName": "Mipangilio",
+      "CompanyName": "Mfuko wa Taifa wa Bima ya Afya"
+    },
+    "HOME": {
+      "TITLE": "Habari Dunia",
+      "BROWSER_PREF": "Navigateur préférence: {{ value }}",
+      "TODAYS_DATE": "La date d'aujourd'hui",
+      "A_NUMBER": "Un numéro"
+    },
+    "MemberAuthorization": {
+      "CardAuthorization": "Uhakiki wa Kadi",
+      "MemberVerificationLink": "Hakiki Mwanachama",
+      "PatientLastVisitLink": "Ziara za mwisho za Mgonjwa",
+      "AuthorizedPatientsLink": "Wagonjwa walio hakikiwa",
+      "Form2cLink": "Fomu 2C",
+      "Form2eLink": "Fomu 2E",
+      "ReferredPatientsLink": "Wagonjwa wa rufaa",
+      "VisitTypePlaceholder":"Chagua aina ya ujio",
+      "IDTypePlaceholder":"Chagua aina ya kitambulisho",
+      "ReasonsForEmergency": "Sababu za dharura",
+      "SearchButtonText": "Tafuta",
+      "AuthorizeButtonText": "Hakiki",
+      "PatientDetails": "Taarifa za Mgonjwa",
+      "MembershipNo" : "Numbari ya Uanachama",
+      "FullName" : "Jina kamili",
+      "Gender" : "Jinsia",
+      "DateOfBirth" : "Tarehe ya kuzaliwa",
+      "ProductName":"Jina la Kifurushi",
+      "AuthorizationNo": "Nambari ya Uhakiki",
+      "AuthorizationStatus": "Hali ya Uhakiki",
+      "Remarks": "Matamshi",
+      "CardStatus": "Hali ya Kadi",
+      "IsValidCard":"Ni kadi halali?",
+      "IsActive":"Inafanya kazi?",
+      "LastVisitedFacilities":"Vituo Vilivyotembelewa Mwisho"
+    },
+    "ClaimRegistrationForm": {
+      "Title": "Usajili wa Madai",
+      "CreateButton": "sajili dai",
+      "ClaimNo": "Namba ya dai",
+      "ClaimYear":"Mwaka wa dai",
+      "ClaimMonth":"Mwezi wa dai",
+      "NumberOfFolios":"Idadi ya folio",
+      "AmountClaimed":"Kiasi kilichodaiwa",
+      "Status": "Hali ya dai"
+    },
+    "ClaimFolios": {
+      "Title": "Usajili wa folio",
+      "CreateButton": "Ingiza dai ",
+      "SubmitButton": "Tuma"
+    },
+    "ClaimDataEntryForm": {
+      "Title": "Fomu ya Madai",
+      "SearchButton": "Tafuta",
+      "AutoSubmitText": "kuwasilisha kiotomatiki",
+      "SerialNo": "Nambari ya serial.",
+      "CardNo":"Namba ya Kadi.",
+      "FirstName": "Jina la Kwanza",
+      "LastName": "Jina la Mwisho",
+      "Gender": "Jinsia",
+      "DateOfBirth":"Tarehe ya kuzaliwa",
+      "AttendanceDate": "Tarehe ya Mahudhurio",
+      "PreliminaryDiagnosisCode":"Nambari za utambuzi wa awari",
+      "AuthorizationNo":"Nambari ya uhakiki.",
+      "TelephoneNo":"Namba ya simu.",
+      "PatientFileNo": "Nambari ya Faili ya Mgonjwa",
+      "PatientType": "Aina ya Mgonjwa",
+      "DateAdmitted": "Tarehe ya kulazwa",
+      "DateDischarged": "Tarehe ya kuruhusiwa",
+      "PractitionerName": "Jina la Mtaalam(Daktari)",
+      "FinalDiagnosisCode":"Nambari za utambuzi wa mwisho",
+      "CostOfService":"Gharama za huduma",
+      "FolioItemForm": {
+        "Title":"Huduma",
+        "ItemType":"Aina ya huduma",
+        "ItemDetails": "Jina la huduma",
+        "Quantity": "Idadi",
+        "DoseDuration": "Muda wa dozi(Siku)",
+        "UnitPrice": "Bei",
+        "AmountClaimed": "Kiasi Kilichodaiwa",
+        "ApprovalRefNo": "Nambari ya Kibali.",
+        "SaveButton": "Ingiza",
+        "CloseButton": "Funga"
+      },
+      "SaveButton": "Tuma",
+      "CloseButton": "Funga"
+    },
+    "DischargeForm":{
+      "Title": "Fomu ya kuruhusu Mgonjwa kutoka",
+      "CloseButton": "Funga",
+      "DischargeButton": "Toa Mgonjwa"
+    },
+    "Footer": {
+      "Copyright": "Sekretarieti ya Ajira. Haki zote zimehifadhiwa.",
+      "PrivacyPolicy": "Sera ya faragha",
+      "CompanyTerms": "Sheria & Mashart",
+      "Disclaimer": "Kanusho",
+      "Designer": "Imesanifiwa na Kutengenezwa na"
+    }
+  }

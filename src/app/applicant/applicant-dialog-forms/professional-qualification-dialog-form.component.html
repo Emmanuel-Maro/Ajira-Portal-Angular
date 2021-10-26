@@ -1,0 +1,93 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin" [fullScreen]="true">
+    <p style="color: white"> Wait... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        <span>Professional Qualifications</span>
+        <span class="spacer"></span>
+        <mat-icon (click)="onClose()">close</mat-icon>
+        
+    </mat-toolbar>
+    <mat-card-content> <!--{{applicantService.ProfessionalQualificationForm.value | json}} {{applicantService.ProfessionalQualificationForm.valid | json}}-->
+        <form [formGroup]="applicantService.ProfessionalQualificationForm" class="normal-form" (submit)="onSubmit()"> 
+            <div  fxLayout="row"  fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between start"> 
+                <div  fxLayout="column" fxFlex="48" style="width: 100%;">
+                    <div>
+                        <ng-select
+                            [items]="countries"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="id"
+                            (change)="onCountrySelect()"
+                            placeholder="Country"
+                            formControlName="countryId">
+                        </ng-select>
+                    </div>
+                    <div *ngIf="applicantService.ProfessionalQualificationForm.controls['countryId'].value  === 1">
+                        <ng-select
+                            [items]="institutionNames"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="id"
+                            (change)="onInstitutionNameSelect(applicantService.ProfessionalQualificationForm.controls['institutionId'].value)"
+                            placeholder="Institution/Organization"
+                            formControlName="institutionId">
+                        </ng-select>
+                    </div>
+                    
+                    <mat-form-field floatLabel="never" *ngIf="applicantService.ProfessionalQualificationForm.controls['countryId'].value  !== 1">
+                        <input matInput  placeholder="Institution Name(Specify)" formControlName='otherInstituteName' autocomplete="off">
+                    </mat-form-field>
+                    <div *ngIf="applicantService.ProfessionalQualificationForm.controls['countryId'].value  === 1">
+                        <ng-select
+                            [items]="courseNames"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="name"
+                            bindValue="id"
+                            placeholder="Course Name"
+                            formControlName="courseId">
+                        </ng-select>
+                    </div>
+                    <mat-form-field floatLabel="never" *ngIf="applicantService.ProfessionalQualificationForm.controls['countryId'].value  !== 1">
+                        <input matInput  placeholder="Course Name(Specify)" formControlName='otherCourseName' autocomplete="off">
+                    </mat-form-field>
+                </div>
+                <div  fxLayout="column" fxFlex="48">
+                    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="space-between start">
+                        <div fxFlex="48">
+                            <mat-form-field  color="warn" floatLabel="always" appearance="fill">
+                                <mat-label>Start Date:</mat-label>
+                                <input formControlName="startDate"  matInput [matDatepicker]="start_date_picker"  (click)="start_date_picker.open()" placeholder="Start Date:">
+                                <mat-datepicker-toggle matSuffix [for]="start_date_picker"></mat-datepicker-toggle>
+                                <mat-datepicker #start_date_picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="48">
+                            <mat-form-field  color="warn" floatLabel="always" appearance="fill">
+                                <mat-label>End Date:</mat-label>
+                                <input formControlName="endDate"  matInput [matDatepicker]="end_date_picker" (click)="end_date_picker.open()" placeholder="End Date:">
+                                <mat-datepicker-toggle matSuffix [for]="end_date_picker"></mat-datepicker-toggle>
+                                <mat-datepicker #end_date_picker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div>
+                    <mat-hint>Attach your certificate  </mat-hint>
+                        <input type="file" [ngStyle]="{'border': errborder}" (change)="onFileChange($event)" accept="application/pdf" #certificateFile required>
+                    </div>
+
+                </div>
+            </div>
+            <div class="button-row">
+                <button mat-button  color="primary" type="submit"><mat-icon>save_alt</mat-icon>Save</button>
+                <button type="button" mat-button color="warn" (click)="onClose()"><mat-icon>close</mat-icon>Close</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

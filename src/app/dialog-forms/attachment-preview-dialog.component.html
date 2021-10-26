@@ -1,0 +1,17 @@
+
+    <mat-card>
+        <mat-toolbar [ngStyle.lt-lg]="{'font-size.px': 12 }" style="margin-bottom: 5px; height: 40px; font-size: 1em;  background: radial-gradient(#bfbfc4, #fff); color:#000">
+            <mat-icon>list</mat-icon> {{attachmentType}}
+            <span class="spacer"></span>
+            <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose(false)">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-card-content>
+            <mat-dialog-content>
+            <div *ngIf="!isFilePath"><object type="application/pdf" [data]="docData | safe" style="width:100%; height:490px;"></object></div>
+           <div *ngIf="isFilePath"><pdf-viewer [src]="filePath" [show-all]="true" [stick-to-page]="true" style="display: block;"></pdf-viewer></div>
+            
+            </mat-dialog-content>
+       </mat-card-content>
+    </mat-card>

@@ -1,0 +1,60 @@
+
+    <mat-card>
+      <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000">
+        <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>list</mat-icon>
+        </button>-->
+       <span>Resources</span>
+     </mat-toolbar>
+        <mat-card-content>
+          <div class="search-div" *ngIf='vacanciesDataSource && vacanciesDataSource.data.length > 0'>
+            <mat-form-field class="search-form-field" floatLabel="never">
+             <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="onSearchClear()" *ngIf="searchKey">
+               <mat-icon>close</mat-icon>
+             </button>
+             </mat-form-field>
+          </div>
+          <div class="mat-elevation-z8">
+            <mat-table  [dataSource]="vacanciesDataSource" matSort>
+                <ng-container matColumnDef="Description">
+                <mat-header-cell *matHeaderCellDef  mat-sort-header>Name </mat-header-cell>
+                <mat-cell *matCellDef="let element" style="display: block; padding-left: 11px"> 
+                  <span class="mobile-label">Name:</span>
+                  {{element.Title}}
+                </mat-cell>
+                </ng-container>
+                
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                      <div fxLayout="column">
+                        <div>
+                          <button mat-icon-button (click)="onPreview(element.Url)" *ngIf='element.Type ==="pdf"'><mat-icon color="warn">picture_as_pdf</mat-icon> open</button>
+                          <button mat-icon-button (click)="onVideoLinkClicked(element.Title, element.Url)" *ngIf='element.Type ==="video"'><mat-icon color="warn">video_library</mat-icon> open</button>
+                        </div> 
+                      </div>
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="7">
+                        <div class="loader"></div>
+                        loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData" >
+                    <mat-footer-cell *matFooterCellDef colspan="7"> No data... </mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || vacanciesDataSource.data.length > 0}"></mat-footer-row>
+            </mat-table>
+            <mat-paginator [length]="vacanciesDataSource.data.length" [pageSizeOptions]="[10,25,50,100]" [pageIndex]="0" [pageSize]="10" showFirstLastButtons></mat-paginator>                          
+        </div>
+        </mat-card-content>
+    </mat-card>
+
+ 
+    

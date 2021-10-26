@@ -1,0 +1,43 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Wait... </p>
+</ngx-spinner>
+<div fxLayout="row" fxLayoutAlign="center center">
+    <div fxFlex="40" fxFlex.lt-md = "100" fxFlex.md = "40" >
+        <mat-card>
+            <mat-toolbar color="primary" style="height: 40px;background-color: #1e88e5; color:#fff;">Login</mat-toolbar>
+            <mat-card-header>
+                <mat-card-subtitle><code *ngIf="status =='activated'" style="font-size: 1rem;">your account has been activated successfully</code></mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content> 
+                <mat-progress-bar color="primary" mode="query" *ngIf="showProgressBar"></mat-progress-bar>
+                <form [formGroup]="loginForm" (submit)="login()">
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="username" formControlName='username' #usernameInput="matInput">
+                        <mat-icon matPrefix [color]="usernameInput.focused ? 'primary' : ''">account_box</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input [type]="hidePassword ? 'password':'text'" matInput placeholder="Password" formControlName='password' #passwordInput="matInput">
+                        <mat-icon class="visibility-icon" matSuffix (click)="hidePassword=!hidePassword">{{hidePassword ? 'visibility_off': 'visibility'}}</mat-icon>
+                        <mat-icon  matPrefix [color]="passwordInput.focused ? 'primary' : ''" >lock</mat-icon>
+                    </mat-form-field>
+                    
+                    <button mat-raised-button  [disabled]="showProgressBar"color="primary" type="submit">Sign In</button>
+                   
+                </form>
+                <hr>
+                <div *ngIf='loginError.error_description'>
+                    <span style="color:#e91e63;">{{loginError.error_description}}</span>
+                </div>
+                <div *ngIf='state.errorMessage'>
+                    <span style="color:#e91e63;">{{state.errorMessage}}</span>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+                <button mat-button [routerLink]="['/forgot-password']">Forgot password?</button>
+                <button mat-button [routerLink]="['/register']" color="primary">Register Now </button>
+            </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

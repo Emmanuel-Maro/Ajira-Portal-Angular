@@ -1,0 +1,59 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        Attachments</mat-toolbar>
+    <mat-card-content> 
+        <div fxLayout="column">
+            <div fxFlex="50" style="margin-right: 1rem;">
+                <ng-select 
+                    [items]="attachmentTypes"
+                    [clearable]="false"
+                    bindLabel="name"
+                    placeholder="select document type" 
+                    [(ngModel)]="selectedAttachmentType">
+                </ng-select>
+            </div>
+            <div fxFlex="50">
+                <input type="file" [disabled]='!selectedAttachmentType' (change)="onFileChange($event)" accept="application/pdf" #attachmentFile>
+            </div>
+        </div>
+
+        <!--<button mat-raised-button color="accent" [disabled]='!selectedAttachmentType || !fileObject.fileData' (click)='addAttachment()'>Add</button>-->
+        <hr>
+        <mat-table [dataSource]="attachmentsDataSource" matSort>
+            <ng-container matColumnDef="otherAttachmentName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Attachment Type </mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Attachment Type:</span>
+                    {{element.otherAttachmentName}}
+                 </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action_view">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <a mat-icon-button  href="{{attachmentBaseUrl + row. otherAttachmentUrl}}" target="_blank" title="preview attachment">
+                        <mat-icon color="primary">attachment</mat-icon> view attchment
+                    </a>
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="action_delete">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button type="button" mat-icon-button color="warn" title="delete"
+                        (click)="onDelete(row)">
+                        <mat-icon>delete_outline</mat-icon> delete
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card> 

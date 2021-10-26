@@ -1,0 +1,71 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <span>Referees</span></mat-toolbar>
+    <mat-card-content> 
+        <div style="margin-bottom:.5rem"><button mat-raised-button (click)="onInsert()"><mat-icon>add_circle</mat-icon> Add New</button></div>
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="refereeTitle">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Title</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Title:</span>
+                    {{element.refereeTitle}} 
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="fullName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Full Name</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Full Name:</span>
+                    {{element.fullName}} 
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="refereeOrganization">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Institution Name</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Institution:</span>
+                    {{element.refereeOrganization}}
+                 </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="emailAddress">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <span class="mobile-label">Email:</span>
+                     {{element.emailAddress}} 
+                    </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="telephoneNumber">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Mobile No.</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Mobile No:</span>
+                    {{element.telephoneNumber}} 
+                </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="address">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Address</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    <span class="mobile-label">Address:</span>
+                    {{element.refereeAddress}}
+                 </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button type="button" mat-icon-button color="primary" title="edit"
+                        (click)="onEdit(row)">
+                        <i class="fa fa-pencil-square-o fa-2x"></i>
+                    </button>
+                    <button type="button" mat-icon-button color="warn" title="delete"
+                        (click)="onDelete(row)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+</mat-card> 

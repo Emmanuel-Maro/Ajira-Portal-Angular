@@ -1,0 +1,37 @@
+.main{
+    margin:  0 10px 0 0;
+}
+.title{
+    /* margin-bottom: 10px; */
+}
+
+.placement-table {
+    width: 100%;
+  }
+  
+
+  .mat-column-employer_name{
+    padding-left: 16px;
+    font-size: 14x;
+  }
+
+  .mat-column-report_date {
+    padding-left: 16px;
+    font-size: 14px;
+  }
+
+  .mat-column-description {
+    padding-left: 16px;
+    font-size: 14px;
+  }
+
+  .mat-column-advert_id{
+    text-align: center;
+  }
+  
+ 
+  /* .mat-column-demo-symbol {
+    width: 32px;
+    text-align: center;
+    font-weight: bold;
+  } */

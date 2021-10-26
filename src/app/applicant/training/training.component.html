@@ -1,0 +1,79 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <span>Training & Workshop Attended</span></mat-toolbar>
+    <mat-card-content> 
+
+        <div style="margin-bottom:.5rem"><button mat-raised-button (click)="onInsert()"><mat-icon>add_circle</mat-icon>Add New</button></div>
+        <div class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="trainingName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Training Name</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Training Name:</span>
+                        {{element.trainingName}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="trainingInstitution">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Institution</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Institution:</span>
+                        {{element.trainingInstitution}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="startDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Start Date:</span>
+                        {{element.startDate | date:'dd-MM-yyyy'}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="endDate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>End Date</mat-header-cell>
+                    <mat-cell *matCellDef="let element">     
+                     <span class="mobile-label">End Date:</span>
+                        {{element.endDate | date:'dd-MM-yyyy'}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="certificate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Certificate</mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        <a  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank"  title="click to preview">
+                            <mat-icon color="primary">attachment</mat-icon>
+                        </a>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button type="button" mat-icon-button color="primary" title="edit"
+                            (click)="onEdit(row)">
+                            <i class="fa fa-pencil-square-o fa-2x"></i>
+                        </button>
+                        <button type="button" mat-icon-button color="warn" title="delete"
+                            (click)="onDelete(row)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        <div class="loader"></div>
+                        loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData" >
+                    <mat-footer-cell *matFooterCellDef colspan="6"> No data... </mat-footer-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || dataSource.data.length > 0}"></mat-footer-row>
+            </mat-table>
+        </div>
+    </mat-card-content>
+</mat-card> 

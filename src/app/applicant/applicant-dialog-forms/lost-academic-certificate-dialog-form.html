@@ -1,0 +1,69 @@
+<mat-card>
+    <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>Lost Academic Certificate</span>
+        <span class="spacer"></span>
+        <button mat-icon-button  aria-label="icon-button with close icon" (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content>
+        <div *ngIf="!nectaResult">
+            <form [formGroup]="applicantService.LostAcademicCertificateForm" class="normal-form" (submit)="onSubmit()"> 
+                <mat-label><strong>Education Level: </strong> {{educationLevel}}</mat-label>
+                <mat-form-field>
+                    <input matInput formControlName="indexNumber" placeholder="Index Number e.g. S1234-5678" (keyup)="onStartTyping($event)">
+                </mat-form-field>
+                <ng-select
+                    [items]="years"
+                    [selectOnTab]="true"
+                    [clearable]="false" 
+                    bindLabel="year"
+                    bindValue="year"
+                    placeholder="Year Completed:"
+                    formControlName="year">
+                </ng-select>
+                <div class="button-row">
+                    <button mat-button  color="primary" type="submit"><mat-icon>save_alt</mat-icon>Submit</button>
+                </div>
+            </form>
+        </div>
+        <hr/>
+        <div style="margin: 1rem 0" *ngIf="nectaResult && nectaResult.particulars">
+            <table  cellspacing="0" cellpadding="0" class="mat-table" >
+                <tbody>
+                    <tr>
+                        <th>Full Name</th>
+                        <td>{{nectaResult.particulars.first_name + ' ' + nectaResult.particulars.middle_name + ' ' + nectaResult.particulars.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gender</th>
+                        <td>{{nectaResult.particulars.sex | uppercase}}</td>
+                    </tr>
+                    <tr>
+                        <th>Index Number</th>
+                        <td >{{nectaResult.particulars.index_number}}</td>
+                    </tr>
+                    <tr>
+                        <th>Center Name/Number</th>
+                        <td>{{nectaResult.particulars.center_name}}</td>
+                    </tr>
+                    <tr>
+                        <th>Division/Points</th>
+                        <td>{{nectaResult.results.division.division + '-' + nectaResult.results.division.points}}</td>
+                    </tr>
+                </tbody>
+            </table> 
+            <div style="text-align: center;">
+                <p style="margin:0px"><code>By clicking the confirm button you agree with <strong>GENERAL CONDITIONS FOR APPLICANTS</strong></code></p>
+            </div>
+            <div class="button-row">
+                <button mat-button  color="primary" type="button" (click)="postAcademicDetails()"><mat-icon>save_alt</mat-icon>Confirm & Save</button>
+                <button type="button" mat-button color="warn" (click)="onClose()"><mat-icon>close</mat-icon>Close</button>
+            </div>
+        </div>
+       
+    </mat-card-content>
+</mat-card>

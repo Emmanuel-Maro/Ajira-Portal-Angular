@@ -1,0 +1,49 @@
+
+    <mat-card>
+      <mat-toolbar style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+       <span>POST DETAILS</span>
+     </mat-toolbar>
+        <mat-card-content *ngIf='advertDetails'>
+          <div><button mat-raised-button color="primary" style="padding-left: 2px;" (click)="profileCheck(advert_id)">Click to Apply</button></div>
+          <table cellspacing="0" cellpadding="0" class="mat-table advert-details" id="advert-details-table">
+            <tbody>
+                <tr class="mat-row shadow">
+                    <th class="mat-header-cell">POST</th>
+                    <td class="mat-cell">{{advertDetails.codeNumber }} - {{advertDetails.totalPost}} POST</td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">EMPLOYER</th>
+                    <td class="mat-cell">{{advertDetails.employerName}}</td>
+                </tr>
+                <tr class="mat-row shadow">
+                    <th class="mat-header-cell">APPLICATION TIMELINE:</th>
+                    <td class="mat-cell"> <strong>From: </strong>{{ advertDetails.openDate | date:"dd-MM-yyyy" }} <strong style="padding-left:1rem">To: </strong>{{'To: ' + advertDetails.closeDate | date:"dd-MM-yyyy" }}</td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">JOB SUMMARY</th>
+                    <td class="mat-cell">{{advertDetails.jobSummary}}</td>
+                </tr>
+                <tr class="mat-row shadow">
+                    <th class="mat-header-cell">DUTIES AND RESPONSIBILITIES</th>
+                    <td class="mat-cell" >
+                      <div [innerHtml]="advertDetails.dutiesAndResponsibities | safeHtml"></div> 
+                    </td>
+                </tr>
+                <tr class="mat-row">
+                    <th class="mat-header-cell">QUALIFICATION AND EXPERIENCE</th>
+                    <td class="mat-cell" [innerHtml]="advertDetails.qualifications"></td>
+                </tr>
+                <tr class="mat-row shadow">
+                    <th class="mat-header-cell">REMUNERATION</th>
+                    <td class="mat-cell">{{advertDetails.salaryScale}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </mat-card-content>
+    </mat-card>
+
+ 
+    

@@ -1,0 +1,32 @@
+<style>
+  .mat-list-item.selected{
+      background:#1F1F34;
+      color: #fff;
+  }
+</style>
+  <mat-card>
+    <mat-card-content style="min-height: 380px;">
+        <div fxLayout="row">
+            <div fxFlex="20" style="margin-right: 1em;">
+              <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">Utilities</mat-toolbar>
+                <mat-list>
+                    <mat-list-item routerLinkActive="selected"> <button mat-button [routerLink]="['/privacy-policy']"><mat-icon>play_arrow</mat-icon>Privacy Policy</button>
+                    </mat-list-item>
+                    <mat-list-item routerLinkActive="selected"> 
+                      <button mat-button [routerLink]="['/disclaimer']"><mat-icon>play_arrow</mat-icon>Disclaimer Policy</button>
+                    </mat-list-item>
+                </mat-list>
+            </div>
+            <div fxFlex="80">
+                <div>
+                  <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;"><span style="margin: auto;">Disclaimer</span> </mat-toolbar>
+                  <p>This portal is brought to you by the NHIF. The information posted on this portal could include hypertext links or pointers to information created and maintained by non-Government/private organizations. NHIF is providing these links and pointers solely for your information and convenience. When you select a link to an outside portal, you are leaving the NHIF portal and are subject to the privacy and security policies of the owners/sponsors of the outside portal.</p>
+                  <p>NHIF does not guarantee the availability of such linked pages at all times.</p>
+                  <p>NHIF cannot authorize the use of copyrighted materials contained in linked websites. Users are advised to request such authorization from the owner of the linked website.</p>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+

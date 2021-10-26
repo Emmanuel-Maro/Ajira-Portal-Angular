@@ -1,0 +1,14 @@
+
+
+  table{
+    width:100%;
+    border-spacing: 0 8px !important;
+  }
+  .mat-column-ItemName {
+    flex: 0 0 425px;
+    padding-right: 7px;
+  }
+
+  .ng-select.ng-invalid.ng-touched{
+    border:1px dotted rgb(228, 91, 91);
+  }

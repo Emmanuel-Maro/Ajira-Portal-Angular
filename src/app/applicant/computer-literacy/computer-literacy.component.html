@@ -1,0 +1,75 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar color="accent" style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        Computer Literacy</mat-toolbar>
+    <mat-card-content>
+        <form [formGroup]="applicantService.ComputerSkillsForm" (submit)="onSubmit()"> 
+            <div  fxLayout="column"> 
+                    <div fxFlex="100">
+                        <ng-select
+                            [items]="skills"
+                            [selectOnTab]="true"
+                            [clearable]="false"
+                            bindLabel="skillName"
+                            bindValue="skillId"
+                            required
+                            placeholder="Select Computer Skills"
+                            formControlName="computerSkill">
+                        </ng-select>
+                    </div>
+                <div fxLayout="row">
+                        <span style="font-weight: 600;"><mat-label>Level of Competency:</mat-label></span>
+                        <mat-radio-group style="padding:0 1rem;" formControlName="proficiency">
+                            <mat-radio-button  value="3" style="padding-right: 1rem;">Very Good</mat-radio-button>
+                            <mat-radio-button  value="2" style="padding-right: 1rem;">Good</mat-radio-button>
+                            <mat-radio-button  value="1" style="padding-right: 1rem;">Fair</mat-radio-button>
+                        </mat-radio-group>
+                </div>
+                <div style="margin-top: 10px" >
+                    <mat-hint style="padding-right:1rem;">Attach your certificate(Optional)</mat-hint>
+                    <input type="file" (change)="onCertificateAttach($event)" accept="application/pdf" #certificateFile>   
+                </div> 
+              </div>
+              <button color="primary" style="margin-top:1rem;" [disabled]='!applicantService.ComputerSkillsForm.valid' mat-raised-button (click)="onInsert()">Add</button>
+        </form>
+        
+        <div style="margin-top:1rem;">
+            <mat-table [dataSource]="dataSource" matSort>
+           
+                <ng-container matColumnDef="skillName">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Computer Skills</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Computer Skills:</span>
+                        {{element.computerSkillBean}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="proficiency">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Level of Competency</mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label"> Level of Competency:</span>
+                        {{translateProficiency(element.proficiency)}}
+                     </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <a *ngIf="row.otherAttachmentUrl" mat-icon-button  href="{{attachmentBaseUrl + row.otherAttachmentUrl}}" target="_blank" title="preview attachment">
+                            <mat-icon>attachment</mat-icon>
+                        </a>
+                        <button type="button" mat-icon-button color="warn" title="delete"
+                            (click)="onDelete(row)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </div>
+
+    </mat-card-content>
+</mat-card> 

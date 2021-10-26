@@ -1,0 +1,54 @@
+.mat-icon {
+  font-size: 35px;
+}
+
+.mat-card .mat-card-content {
+  padding: 0px;
+}
+
+p.address{
+  line-height: 9px;
+}
+
+.profile-image{
+  border-radius: 7px;
+  border: 1px solid #ccc;
+}
+
+table{
+  width: 100%;
+  margin: 0.5rem 0;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+table tr{
+  border-top: 1px solid #c8ced3;
+}
+table th{
+  padding-left: .5rem;
+  color: #23282c;
+  background-color: #c8ced3;
+}
+
+table th, table td{
+  text-align: left;
+  font-size: .85em;
+  word-break: break-word;
+  border-top: 1px solid #c8ced3;
+  border: 1px solid #dddddd;
+}
+tr.mat-row{
+  height: 30px;
+}
+tr.mat-row td.label{
+  font-weight: 600;
+}
+
+.mat-row:nth-child(odd){
+  background-color: #c8ced345;
+}
+
+.mat-cell{
+  padding-left: .5rem;
+}

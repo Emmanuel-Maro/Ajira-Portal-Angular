@@ -1,0 +1,110 @@
+<div class="container">
+
+<mat-card style="padding:0; margin:0;">
+    <mat-toolbar
+        style="height: 35px; font-size: 1em; background: radial-gradient(#bfbfc4, #fff); color:#000; border: 1px solid #ccc;">
+        <!--<button mat-icon-button >
+            <mat-icon>menu</mat-icon>
+        </button>-->
+        <span>Add Schools</span>
+        <span class="spacer"></span>
+        <mat-icon (click)="onClose()">close</mat-icon>
+    </mat-toolbar>
+
+    <mat-progress-bar mode="indeterminate" *ngIf="selectloading"></mat-progress-bar>
+
+
+    <mat-card-content>
+
+        <div class="box">
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select Region</mat-label>
+                    <mat-select [(value)]="selectedregionid" (selectionChange)="onRegionSelected()">
+                        <mat-option *ngFor="let region of regions" value="{{region.code}}">{{region.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select Council</mat-label>
+                    <mat-select [(value)]="selectedcouncilid" (selectionChange)="onCouncilSelected()">
+                        <mat-option *ngFor="let council of councils" value="{{council.code}}">{{council.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="formclass">
+                    <mat-label>Select School</mat-label>
+                    <mat-select [(value)]="selectedschoolid" (selectionChange)="onSchoolSelected()">
+                        <mat-option *ngFor="let school of schools" value="{{school.id}}">{{school.schoolName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div style="text-align: left; padding-left: 10px;">
+            <div  style="margin-bottom:.5rem" fxShow="false" fxShow.md="true" fxShow.lg="true" fxShow.xl="true"><button
+                [disabled] = "!canAddSchool" mat-raised-button (click)="onSchoolAdded()">
+                <mat-icon>add_circle</mat-icon>Add
+            </button></div>
+            <div style="margin-bottom:.5rem" fxShow="false" fxShow.xs="true" fxShow.sm="true"><button mat-mini-fab
+                [disabled] = "!canAddSchool" color="primary" (click)="onSchoolAdded()" title="add new">+</button></div>
+
+        </div>
+        
+        <div class="selected">
+            Your Selections
+
+            <table mat-table [dataSource]="selectedschoolsdataSource" class="school-table">
+                <ng-container matColumnDef="sn">
+                    <th mat-header-cell *matHeaderCellDef> SN </th>
+                    <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                </ng-container>
+                <ng-container matColumnDef="region">
+                    <th mat-header-cell *matHeaderCellDef> Region </th>
+                    <td mat-cell *matCellDef="let element"> {{element.region}} </td>
+                </ng-container>
+                <ng-container matColumnDef="council">
+                    <th mat-header-cell *matHeaderCellDef> Council </th>
+                    <td mat-cell *matCellDef="let element"> {{element.council}} </td>
+                </ng-container>
+                <ng-container matColumnDef="schoolName">
+                    <th mat-header-cell *matHeaderCellDef> School Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.schoolName}} </td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="ID">
+                    <th mat-header-cell *matHeaderCellDef> ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container> -->
+                <ng-container matColumnDef="schoolid">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        
+                        <button type="button" mat-icon-button color="warn" title="delete"
+                            (click)="onSchoolDeleted(element.schoolName)">
+                            <mat-icon>delete_outline</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="schooldisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: schooldisplayedColumns;"></tr>
+            </table>
+        </div>
+
+
+
+
+        <div class="button-row">
+            <button [disabled] = "!canSaveSChools" mat-button color="primary" type="button" (click)="onSave()">
+                <mat-icon>save_alt</mat-icon>Save
+            </button>
+            <button type="button" mat-button color="warn" (click)="onClose()">
+                <mat-icon>close</mat-icon>Close
+            </button>
+        </div>
+    </mat-card-content>
+</mat-card>
+</div>

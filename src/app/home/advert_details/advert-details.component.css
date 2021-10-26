@@ -1,0 +1,55 @@
+.mat-card .mat-card-header .mat-card-title {
+    font-weight: 600;
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+
+table{
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.mat-column-Description {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  
+    word-break: break-word;
+  
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+  }
+
+  table.advert-details{
+    width:100%;
+}
+
+table.advert-details tr{
+    border-top: 1px solid #c8ced3;
+}
+table.advert-details th{
+    color: #23282c;
+}
+
+table.advert-details th, table.advert-details td{
+    padding: 0.6rem;
+    text-align: left;
+    font-size: .85em;
+    border-top: 1px solid #c8ced3;
+    border-right: 1px solid #c8ced3;
+    border-left: 1px solid #c8ced3;
+}
+
+table.advert-details td{
+    text-align: left;
+    font-size: .85em;
+    border-top: 1px solid #c8ced3;
+}
+table.advert-details tr.shadow{
+  background-color: #f8f9fa;
+}

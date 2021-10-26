@@ -1,0 +1,77 @@
+
+
+.ng-select.ng-invalid.ng-touched{
+  border:1px dotted rgb(228, 91, 91);
+}
+.ng-select {
+  padding-bottom: 0px;
+}
+
+.mat-card .mat-card-header .mat-card-title {
+  font-weight: 600;
+  font-size: 1em;
+  margin-bottom: 2px;
+}
+
+table{
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.mat-header-cell {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 30% !important;
+  width: 30% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+table.question-answer{
+  width:100%;
+}
+
+table.question-answer tr{
+  border-top: 1px solid #c8ced3; 
+}
+table.question-answer th{
+  color: #23282c;
+}
+
+table.question-answer th, table.question-answer td{
+  padding: 0.6rem;
+  text-align: left;
+  font-size: .85em;
+  border: 1px solid #c8ced3;
+}
+
+table.question-answer td{
+  text-align: left;
+  font-size: .85em;
+  border-top: 1px solid #c8ced3;
+}
+table.question-answer tr.shadow{
+background-color: rgba(0,0,0,.05);
+}
+
+/************* Mobile **************************/
+@media(max-width: 600px) {
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+        font-weight: bold;
+  }
+
+.mat-card .mat-card-content {
+  font-size: .75rem;
+  line-height: 23px;
+  padding: 7px;
+}
+}

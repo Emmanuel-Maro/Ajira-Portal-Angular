@@ -1,0 +1,27 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+<div style="margin-top: 20px;">
+    <mat-card>
+        <mat-toolbar 
+        [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+        [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+        Attach Application Letter</mat-toolbar>
+
+            <mat-card-content style="margin-top: 20px; padding: 20px;">
+                <p>I declare that the information provided in my profile is complete and correct to the best of my knowledge and matches the criteria for this Post.</p>
+                <p>I understand that any false information supplied could lead to my application being disqualified or my discharge if I am appointed.</p>
+                <p>Please attach your Appliation letter Here. <code><strong>(File size Max. 1MB, only pdf)</strong></code></p>
+                
+                <input type="file"  (change)="onFileChange($event)" accept="application/pdf" #inputFile>
+                <hr/>
+                <div>
+                  <button *ngIf='applicationLetterIsSigned' mat-raised-button color="primary" (click)="apply()">Confirm Application</button>
+                </div>
+            </mat-card-content>
+        
+    </mat-card>
+</div>

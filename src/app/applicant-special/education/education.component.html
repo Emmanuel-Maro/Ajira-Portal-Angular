@@ -1,0 +1,88 @@
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="line-spin-clockwise-fade"
+    [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<mat-card>
+    <mat-card-content>
+        <mat-toolbar
+            [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+            <!--<button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>-->Selected Teaching Subjects
+        </mat-toolbar>
+
+        <mat-table [dataSource]="subjectdataSource" class="subject-table">
+            <ng-container matColumnDef="sn">
+                <mat-header-cell *matHeaderCellDef> SN </mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="subject">
+                <mat-header-cell *matHeaderCellDef> Subject Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.subject.name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="subjectloading">
+                <mat-footer-cell *matFooterCellDef colspan="5">
+                    <div class="loader"></div>
+                    loading data...
+                </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="noSubjectData" >
+                <mat-footer-cell *matFooterCellDef colspan="5"> No subject selected </mat-footer-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="subjectdisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: subjectdisplayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['subjectloading']" [ngClass]="{'hide':!subloading }"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['noSubjectData']" [ngClass]="{'hide':subloading || isSubjectSelected }"></mat-footer-row>
+        </mat-table>
+    </mat-card-content>
+    <mat-card-content>
+        <mat-toolbar style="margin-top: calc(5px + 1vw);"
+            [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}"
+            [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+            <!--<button mat-icon-button>
+                <mat-icon>menu</mat-icon>
+            </button>-->Selected Schools
+        </mat-toolbar>
+
+        <mat-table [dataSource]="selectedschoolsdataSource" class="school-table">
+            <ng-container matColumnDef="sn">
+                <mat-header-cell *matHeaderCellDef> SN </mat-header-cell>
+                <mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="region">
+                <mat-header-cell *matHeaderCellDef> Region </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="council">
+                <mat-header-cell *matHeaderCellDef> Council </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.council}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="schoolName">
+                <mat-header-cell *matHeaderCellDef> School Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.schoolName}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="schoolloading">
+                <mat-footer-cell *matFooterCellDef colspan="5">
+                    <div class="loader"></div>
+                    loading data...
+                </mat-footer-cell>
+            </ng-container>
+            <ng-container matColumnDef="noSchoolData" >
+                <mat-footer-cell *matFooterCellDef colspan="5"> No school selected </mat-footer-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="schooldisplayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: schooldisplayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="['schoolloading']" [ngClass]="{'hide':!schoolloading }"></mat-footer-row>
+            <mat-footer-row *matFooterRowDef="['noSchoolData']" [ngClass]="{'hide':schoolloading || isSchoolSelected }"></mat-footer-row>
+        </mat-table>
+
+
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,116 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "line-spin-clockwise-fade" [fullScreen] = "true">
+    <p style="color: white" > Loading... </p>
+</ngx-spinner>
+
+<mat-card>
+    <mat-toolbar 
+    [ngStyle.xs]="{'height': '25px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.sm]="{'height': '27px', 'font-size': '.7em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.md]="{'height': '29px', 'font-size': '.8em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.lg]="{'height': '31px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}" 
+    [ngStyle.xl]="{'height': '33px', 'font-size': '.9em', 'background': 'radial-gradient(#bfbfc4, #fff)', 'color':'#000', 'border': '1px solid #ccc'}">
+        <!--<button mat-icon-button>
+            <mat-icon>menu</mat-icon>
+        </button>-->Academic Qualification</mat-toolbar>
+    <mat-card-content> 
+        <div style="margin-bottom:.5rem" fxShow="false" fxShow.md="true" fxShow.lg="true"  fxShow.xl="true"  ><button mat-raised-button (click)="onCreate()"><mat-icon>add_circle</mat-icon>Add New</button></div>
+        <div style="margin-bottom:.5rem" fxShow="false" fxShow.xs="true" fxShow.sm="true"><button mat-mini-fab color="primary" (click)="onCreate()" title="add new">+</button></div>
+        <div class="mat-elevation-z8">
+            <mat-table  [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="educationLevel">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Education Level </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Education Level:</span>
+                        {{element.level}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="programmeName">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Programme Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">Programme:</span>
+                        {{element.programmeName}} 
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="dateFrom">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> From </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">From:</span>
+                        {{element.dateFrom | date:'dd-MM-yyyy'}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="dateTo">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header>To </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> 
+                        <span class="mobile-label">To:</span>
+                        {{element.dateTo | date:'dd-MM-yyyy'}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="institutionName">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-header> Institution Name </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <span class="mobile-label">Institution:</span>
+                        {{element.institutionName || element.institutionNameOther}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <div fxLayout="column">
+                            <div *ngIf="row.attachmentUrl">
+                                <a mat-icon-button  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview certificate attachment">
+                                    <mat-icon color="primary">attachment</mat-icon> Certificate
+                                </a>
+                            </div>
+                            <div *ngIf="row.attachmentUrl">
+                                <a mat-icon-button  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview attachment">
+                                    <mat-icon color="primary">attachment</mat-icon> Transcript
+                                </a>
+                            </div>
+                            <div *ngIf="row.attachmentUrl">
+                                <a mat-icon-button  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview attachment">
+                                    <mat-icon color="primary">attachment</mat-icon> TCU Verification
+                                </a>
+                            </div>
+                            <div *ngIf="isCertificateShown">
+                                <a mat-icon-button  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview attachment">
+                                    <mat-icon color="primary">attachment</mat-icon> Certificate
+                                </a>
+                            </div>
+                            <div *ngIf="isCertificateShown">
+                                <a mat-icon-button  href="{{attachmentBaseUrl + row.attachmentUrl}}" target="_blank" title="preview attachment">
+                                    <mat-icon color="primary">attachment</mat-icon> Certificate
+                                </a>
+                            </div>
+                            <button mat-icon-button (click)="onEdit(row)"  title="edit" color="primary">
+                                <i class="fa fa-pencil-square-o fa-2x"></i> 
+                            </button>
+                        </div>
+                    </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                        <div class="loader"></div>
+                        loading data...
+                    </mat-footer-cell>
+                </ng-container>
+                <ng-container matColumnDef="noData" >
+                    <mat-footer-cell *matFooterCellDef colspan="6"> No data... </mat-footer-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':!loading }"></mat-footer-row>
+                <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':loading || dataSource.data.length > 0}"></mat-footer-row>
+            </mat-table>
+            <mat-paginator [length]="dataSource.data.length" [pageSizeOptions]="[5,10,15,20]" [pageIndex]="0" [pageSize]="10" showFirstLastButtons></mat-paginator>
+        </div>
+        <div style="visibility: hidden; position: fixed"
+            [style.left]="contextMenuPosition.x"
+            [style.top]="contextMenuPosition.y"
+            [matMenuTriggerFor]="contextMenu">
+        </div>
+        <mat-menu #contextMenu="matMenu">
+            <ng-template matMenuContent let-item="item">
+                <button mat-menu-item (click)="onPreview(item)" [disabled]="item.IsSubmitted"><mat-icon>edit</mat-icon>edit folio</button>
+                <button mat-menu-item (click)="onUpdate(row)" [disabled]="item.IsSubmitted"><mat-icon>delete_outline</mat-icon>delete folio</button>
+            </ng-template>
+        </mat-menu>   
+    </mat-card-content>
+</mat-card> 

@@ -1,0 +1,32 @@
+
+table{
+  width:100%;
+}
+
+.search-div{
+margin: 10px;;
+}
+.search-form-field{
+width: 60%;
+margin-left: 10px;
+padding: 0px 10px;
+background-color: #f5f5f5;
+border-radius: 9px;
+}
+
+.video-play-button {
+  color:#834cef;
+  font-size: 48px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.heartbit::before{
+  position: absolute;
+  border-radius: 100%;
+  top: 0%;
+  left: 25%;
+  height: 25px;
+  width: 25px;
+}
