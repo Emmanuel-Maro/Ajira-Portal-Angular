@@ -89,6 +89,7 @@ export class EducationComponent implements OnInit {
       else {
         this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
       } 
+      this.changeDetectorRef.detectChanges();
     });
 
     
@@ -97,23 +98,21 @@ export class EducationComponent implements OnInit {
   getSelectedSchools(){
     this.dataService.getEducationSchools('216655').subscribe(result=>{
       this.schoolloading = false;
-      console.log(result.data);
-
-      if(result.data.length > 0 || result.data == null){
-        this.isSchoolSelected = true;
-      }
-      else{
+      console.log("response: ", result.data);
+      if(result.data == null){
         this.isSchoolSelected = false;
       }
-
-      this.selectedschoolsdataDBArray = result.data;
-
-      for(var i = 0; i < this.selectedschoolsdataDBArray.length; ++i){
-        this.selectedschoolsdataArray.push({"id": this.selectedschoolsdataDBArray[i].id,"region":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.region.regionName,"councilid":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.id,"council":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.name,"schoolName":this.selectedschoolsdataDBArray[i].schoolRequirement.school.name,"schoolid":this.selectedschoolsdataDBArray[i].schoolRequirement.school.id});
+      else{
+        this.isSchoolSelected = true;
+        this.selectedschoolsdataDBArray = result.data;
+        for(var i = 0; i < this.selectedschoolsdataDBArray.length; ++i){
+          this.selectedschoolsdataArray.push({"id": this.selectedschoolsdataDBArray[i].id,"region":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.region.regionName,"councilid":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.id,"council":this.selectedschoolsdataDBArray[i].schoolRequirement.school.council.name,"schoolName":this.selectedschoolsdataDBArray[i].schoolRequirement.school.name,"schoolid":this.selectedschoolsdataDBArray[i].schoolRequirement.school.id});
+        }
       }
-      this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
 
+      this.selectedschoolsdataSource.data = this.selectedschoolsdataArray;
       this.changeDetectorRef.detectChanges();
+
     },errorResponse=>{
       this.schoolloading = false;
       console.log("Error: "+errorResponse);
@@ -124,6 +123,8 @@ export class EducationComponent implements OnInit {
       else {
         this.openSnackBar("an error occurred when try to fetch data from remote server", "warning-snackbar");
       } 
+
+      this.changeDetectorRef.detectChanges();
     });
   }
 
