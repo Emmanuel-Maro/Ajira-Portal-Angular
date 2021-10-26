@@ -10,26 +10,15 @@
     </div>
   </div>
 
-  <!-- <div *ngIf='isAuthenticated()' class="navigation-menu" fxLayout="column">
-    <a mat-raised-button [routerLink]="['/applicant/dashboard']" ><mat-icon>home</mat-icon>Home</a>
-    <a mat-raised-button [routerLink]="['/applicant/education']" *ngIf="showEducation" routerLinkActive="selected">Education Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/subjects']" *ngIf="showEducation" >Teaching Subjects</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/schools']" *ngIf="showEducation" >Schools</a>
-    <a mat-raised-button [routerLink]="['/applicant/health']" *ngIf="showHealth" routerLinkActive="selected">Health Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/health/facilities']" *ngIf="showHealth">Facilities</a>
-    <!-- <a mat-raised-button [routerLink]="['/applicant/education/letter']" *ngIf="showEducation" >Attach Letter</a> -->
-    <!-- <a mat-raised-button [routerLink]="['/applicant/health/letter']" *ngIf="showHealth">Attach Letter</a> 
-  </div> -->
-
   <div *ngIf='isAuthenticated() && showEducation' class="navigation-menu" fxLayout="column">
     <a mat-raised-button [routerLink]="['/applicant/dashboard']" routerLinkActive="selected"><mat-icon>home</mat-icon>Home</a>
-    <a mat-raised-button [routerLink]="['/applicant/education']" routerLinkActive="selected">Education Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/subjects']" routerLinkActive="selected">Teaching Subjects</a>
-    <a mat-raised-button [routerLink]="['/applicant/education/schools']" routerLinkActive="selected">Schools</a>
+    <a mat-raised-button [routerLink]="['/applicant/education']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">Education Dashboard</a>
+    <a mat-raised-button [routerLink]="['/applicant/education/subjects']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">Teaching Subjects</a>
+    <a mat-raised-button [routerLink]="['/applicant/education/schools']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">Schools</a>
   </div>
   <div *ngIf='isAuthenticated() && showHealth' class="navigation-menu" fxLayout="column">
     <a mat-raised-button [routerLink]="['/applicant/dashboard']" routerLinkActive="selected"><mat-icon>home</mat-icon>Home</a>
-    <a mat-raised-button [routerLink]="['/applicant/health']" routerLinkActive="selected">Health Dashboard</a>
-    <a mat-raised-button [routerLink]="['/applicant/health/facilities']" routerLinkActive="selected">Facilities</a>
+    <a mat-raised-button [routerLink]="['/applicant/health']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">Health Dashboard</a>
+    <a mat-raised-button [routerLink]="['/applicant/health/facilities']" routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}">Facilities</a>
   </div>
 </div>
