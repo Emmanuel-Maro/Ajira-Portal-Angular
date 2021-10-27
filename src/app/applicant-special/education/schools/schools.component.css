@@ -51,3 +51,46 @@
   hyphens: auto;
   } 
   
+
+  /* Mobile */
+
+@media(max-width: 780px) {
+  .mobile-label {
+    width: 100px;
+    display: inline-block;
+        font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  .mat-row { 
+    flex-direction: column;
+    align-items: start;
+    padding: 5px 3px;
+  }
+  .mat-cell {
+    word-break: unset;
+  }
+  .mat-column-sn {
+    width: 100% !important;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    } 
+  
+  .mat-column-region, .mat-column-council, .mat-column-schoolName  {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    }
+
+}

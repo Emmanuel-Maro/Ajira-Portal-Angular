@@ -8,17 +8,10 @@
     padding-right:10px;
 }
 .mat-column-sn {
-  word-wrap: break-word !important;
-  white-space: unset !important;
-  flex: 0 0 5% !important;
   width: 5% !important;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
-  padding-left: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 .mat-column-subject {
 word-wrap: break-word !important;
@@ -39,10 +32,8 @@ hyphens: auto;
   width: 40% !important;
   overflow-wrap: break-word;
   word-wrap: break-word;
-  -ms-hyphens: auto;
-  -moz-hyphens: auto;
-  -webkit-hyphens: auto;
-  hyphens: auto;
+  display: flex;
+  justify-content: center;
   text-align: center;
   }
 
@@ -75,64 +66,37 @@ hyphens: auto;
     .mat-cell {
       word-break: unset;
     }
-    .mat-column-educationLevel {
-      word-wrap: break-word !important;
-      white-space: unset !important;
-      flex: 0 0 100% !important;
+
+    .mat-column-sn {
       width: 100% !important;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      -webkit-hyphens: auto;
-      hyphens: auto;
+      display: flex;
+      justify-content: left;
+      text-align: left;
     }
-  
-    .mat-column-dateFrom, .mat-column-dateTo {
-      word-wrap: break-word !important;
-      white-space: unset !important;
-      flex: 0 0 100% !important;
-      width: 100% !important;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      -webkit-hyphens: auto;
-      hyphens: auto;
+    .mat-column-subject {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
     }
-  
-    .mat-column-actions {
+    .mat-column-id {
       word-wrap: break-word !important;
       white-space: unset !important;
       flex: 0 0 100% !important;
       width: 100% !important;
       overflow-wrap: break-word;
       word-wrap: break-word;
-      -ms-hyphens: auto;
-      -moz-hyphens: auto;
-      -webkit-hyphens: auto;
-      hyphens: auto;
-    } 
+      display: flex;
+      justify-content: left;
+      text-align: left;
+      }
     
   }
   
   
-  /*@media(max-width: 760px) {
-    .mat-toolbar-single-row {
-        height: 35px !important;
-    }
-  
-    .mat-column-educationLevel{
-      width:100%;
-    }
-  
-    .mat-header-row {
-      display: none;
-    }
-  
-    .mat-row { 
-      flex-direction: column;
-      align-items: start;
-      padding: 8px 24px;
-    }
-  }*/
